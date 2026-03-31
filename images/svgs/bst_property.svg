@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 480" font-family="'Segoe UI', Arial, sans-serif">
+  <rect width="100%" height="100%" fill="white"/>
+
+  <!-- Title -->
+  <text x="430" y="28" text-anchor="middle" font-size="24" font-weight="bold" fill="#2c3e50">BST Property</text>
+  <text x="430" y="46" text-anchor="middle" font-size="13" fill="#888">All values in the left subtree are <tspan font-weight="bold" fill="#27ae60">less than</tspan> the node</text>
+  <text x="430" y="62" text-anchor="middle" font-size="13" fill="#888">All values in the right subtree are <tspan font-weight="bold" fill="#e74c3c">greater than</tspan> the node</text>
+
+  <!-- ===== TREE LAYOUT =====
+       Node circles: r=22, font-size=15
+       Tree:         50
+                   /    \
+                 30      70
+                / \     / \
+              20   40  60  80
+
+       Level 0 (y=100): 430
+       Level 1 (y=180): 290, 570
+       Level 2 (y=260): 220, 360, 500, 640
+  -->
+
+  <!-- Connecting lines (drawn first, behind nodes) -->
+  <line x1="430" y1="122" x2="290" y2="158" stroke="#bdc3c7" stroke-width="2"/>
+  <line x1="430" y1="122" x2="570" y2="158" stroke="#bdc3c7" stroke-width="2"/>
+  <line x1="290" y1="202" x2="220" y2="238" stroke="#bdc3c7" stroke-width="2"/>
+  <line x1="290" y1="202" x2="360" y2="238" stroke="#bdc3c7" stroke-width="2"/>
+  <line x1="570" y1="202" x2="500" y2="238" stroke="#bdc3c7" stroke-width="2"/>
+  <line x1="570" y1="202" x2="640" y2="238" stroke="#bdc3c7" stroke-width="2"/>
+
+  <!-- Level 0: root 50 -->
+  <circle cx="430" cy="100" r="24" fill="#3498db" stroke="#2980b9" stroke-width="2"/>
+  <text x="430" y="106" text-anchor="middle" font-size="15" font-weight="bold" fill="white">50</text>
+
+  <!-- Level 1: 30, 70 -->
+  <circle cx="290" cy="180" r="24" fill="#3498db" stroke="#2980b9" stroke-width="2"/>
+  <text x="290" y="186" text-anchor="middle" font-size="15" font-weight="bold" fill="white">30</text>
+
+  <circle cx="570" cy="180" r="24" fill="#3498db" stroke="#2980b9" stroke-width="2"/>
+  <text x="570" y="186" text-anchor="middle" font-size="15" font-weight="bold" fill="white">70</text>
+
+  <!-- Level 2: 20, 40, 60, 80 -->
+  <circle cx="220" cy="260" r="24" fill="#3498db" stroke="#2980b9" stroke-width="2"/>
+  <text x="220" y="266" text-anchor="middle" font-size="15" font-weight="bold" fill="white">20</text>
+
+  <circle cx="360" cy="260" r="24" fill="#3498db" stroke="#2980b9" stroke-width="2"/>
+  <text x="360" y="266" text-anchor="middle" font-size="15" font-weight="bold" fill="white">40</text>
+
+  <circle cx="500" cy="260" r="24" fill="#3498db" stroke="#2980b9" stroke-width="2"/>
+  <text x="500" y="266" text-anchor="middle" font-size="15" font-weight="bold" fill="white">60</text>
+
+  <circle cx="640" cy="260" r="24" fill="#3498db" stroke="#2980b9" stroke-width="2"/>
+  <text x="640" y="266" text-anchor="middle" font-size="15" font-weight="bold" fill="white">80</text>
+
+  <!-- BST property annotations -->
+  <!-- Node 50: left subtree < 50 < right subtree -->
+  <text x="350" y="128" text-anchor="middle" font-size="12" font-weight="bold" fill="#27ae60">&lt; 50</text>
+  <text x="510" y="128" text-anchor="middle" font-size="12" font-weight="bold" fill="#e74c3c">&gt; 50</text>
+
+  <!-- Node 30: left < 30 < right -->
+  <text x="245" y="208" text-anchor="middle" font-size="11" font-weight="bold" fill="#27ae60">&lt; 30</text>
+  <text x="335" y="208" text-anchor="middle" font-size="11" font-weight="bold" fill="#e74c3c">&gt; 30</text>
+
+  <!-- Node 70: left < 70 < right -->
+  <text x="525" y="208" text-anchor="middle" font-size="11" font-weight="bold" fill="#27ae60">&lt; 70</text>
+  <text x="615" y="208" text-anchor="middle" font-size="11" font-weight="bold" fill="#e74c3c">&gt; 70</text>
+
+  <!-- Footer: key insight box -->
+  <rect x="30" y="310" width="800" height="150" rx="8" fill="#ecf0f1" stroke="#bdc3c7" stroke-width="1"/>
+
+  <text x="430" y="338" text-anchor="middle" font-size="14" font-weight="bold" fill="#2c3e50">The BST Property Holds at Every Node</text>
+
+  <text x="80" y="366" font-size="12" fill="#555">
+    <tspan font-weight="bold" fill="#3498db">Node 50:</tspan> left subtree {20, 30, 40} &#x2014; all &lt; 50.  Right subtree {60, 70, 80} &#x2014; all &gt; 50.
+  </text>
+  <text x="80" y="390" font-size="12" fill="#555">
+    <tspan font-weight="bold" fill="#3498db">Node 30:</tspan> left child 20 &lt; 30.  Right child 40 &gt; 30.  Both also &lt; 50 (parent constraint).
+  </text>
+  <text x="80" y="414" font-size="12" fill="#555">
+    <tspan font-weight="bold" fill="#3498db">Node 70:</tspan> left child 60 &lt; 70.  Right child 80 &gt; 70.  Both also &gt; 50 (parent constraint).
+  </text>
+  <text x="80" y="442" font-size="13" fill="#333">
+    <tspan font-weight="bold">Result:</tspan> in-order traversal visits nodes in <tspan font-weight="bold" fill="#27ae60">sorted order</tspan>: 20, 30, 40, 50, 60, 70, 80
+  </text>
+</svg>

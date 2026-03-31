@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 580" font-family="'Segoe UI', Arial, sans-serif">
+  <rect width="100%" height="100%" fill="white"/>
+
+  <!-- Title -->
+  <text x="430" y="28" text-anchor="middle" font-size="24" font-weight="bold" fill="#2c3e50">One Template, Three Functions</text>
+  <text x="430" y="48" text-anchor="middle" font-size="13" fill="#888">The compiler generates a separate version of inorder_apply for each functor type</text>
+
+  <!-- ===== THE TEMPLATE (top center) ===== -->
+  <text x="430" y="78" text-anchor="middle" font-size="13" font-weight="bold" fill="#888">You write this once:</text>
+
+  <rect x="160" y="88" width="540" height="56" rx="6" fill="#1e1e1e"/>
+  <text x="180" y="110" fill="#569cd6" font-size="12" font-family="Consolas, 'Courier New', monospace">template &lt;<tspan fill="#569cd6">typename</tspan> <tspan fill="#4ec9b0">Functor</tspan>&gt;</text>
+  <text x="180" y="130" fill="#569cd6" font-size="12" font-family="Consolas, 'Courier New', monospace">void <tspan fill="#dcdcaa">inorder_apply</tspan>(<tspan fill="#4ec9b0">Functor</tspan>&amp; <tspan fill="#9cdcfe">func</tspan>) { ... }</text>
+
+  <!-- ===== "The compiler sees 3 calls:" ===== -->
+  <text x="430" y="168" text-anchor="middle" font-size="13" font-weight="bold" fill="#8e44ad">The compiler sees three different calls and generates three versions:</text>
+
+  <!-- ===== Three arrows down ===== -->
+  <line x1="220" y1="180" x2="143" y2="210" stroke="#3498db" stroke-width="2"/>
+  <line x1="430" y1="180" x2="430" y2="210" stroke="#f39c12" stroke-width="2"/>
+  <line x1="640" y1="180" x2="717" y2="210" stroke="#27ae60" stroke-width="2"/>
+
+  <!-- ===== LEFT: PrintFunctor ===== -->
+  <rect x="18" y="214" width="270" height="200" rx="8" fill="#eaf2f8" stroke="#3498db" stroke-width="1.5"/>
+  <text x="153" y="238" text-anchor="middle" font-size="14" font-weight="bold" fill="#3498db">PrintFunctor</text>
+  <text x="153" y="254" text-anchor="middle" font-size="11" fill="#888">Stateless &#x2014; just prints</text>
+
+  <!-- Call -->
+  <rect x="38" y="266" width="230" height="22" rx="4" fill="#f4ecf7" stroke="#8e44ad" stroke-width="1"/>
+  <text x="153" y="282" text-anchor="middle" font-size="11" font-family="Consolas, 'Courier New', monospace" fill="#8e44ad">tree.inorder_apply(pf);</text>
+
+  <!-- Generated code -->
+  <rect x="38" y="298" width="230" height="62" rx="6" fill="#1e1e1e"/>
+  <text x="53" y="316" fill="#6a9955" font-size="10" font-family="Consolas, 'Courier New', monospace">// compiler generates:</text>
+  <text x="53" y="332" fill="#569cd6" font-size="10" font-family="Consolas, 'Courier New', monospace">void inorder_apply(</text>
+  <text x="63" y="348" fill="#4ec9b0" font-size="10" font-family="Consolas, 'Courier New', monospace">PrintFunctor<tspan fill="#d4d4d4">&amp; func) { ... }</tspan></text>
+
+  <!-- Result -->
+  <text x="153" y="382" text-anchor="middle" font-size="11" fill="#555">Output:</text>
+  <text x="153" y="400" text-anchor="middle" font-size="12" font-weight="bold" fill="#3498db">20 30 40 50 60 70 80</text>
+
+  <!-- ===== CENTER: SumFunctor ===== -->
+  <rect x="295" y="214" width="270" height="200" rx="8" fill="#fef9e7" stroke="#f39c12" stroke-width="1.5"/>
+  <text x="430" y="238" text-anchor="middle" font-size="14" font-weight="bold" fill="#e67e22">SumFunctor</text>
+  <text x="430" y="254" text-anchor="middle" font-size="11" fill="#888">Stateful &#x2014; accumulates sum</text>
+
+  <!-- Call -->
+  <rect x="315" y="266" width="230" height="22" rx="4" fill="#f4ecf7" stroke="#8e44ad" stroke-width="1"/>
+  <text x="430" y="282" text-anchor="middle" font-size="11" font-family="Consolas, 'Courier New', monospace" fill="#8e44ad">tree.inorder_apply(sf);</text>
+
+  <!-- Generated code -->
+  <rect x="315" y="298" width="230" height="62" rx="6" fill="#1e1e1e"/>
+  <text x="330" y="316" fill="#6a9955" font-size="10" font-family="Consolas, 'Courier New', monospace">// compiler generates:</text>
+  <text x="330" y="332" fill="#569cd6" font-size="10" font-family="Consolas, 'Courier New', monospace">void inorder_apply(</text>
+  <text x="340" y="348" fill="#4ec9b0" font-size="10" font-family="Consolas, 'Courier New', monospace">SumFunctor<tspan fill="#d4d4d4">&amp; func) { ... }</tspan></text>
+
+  <!-- Result -->
+  <text x="430" y="382" text-anchor="middle" font-size="11" fill="#555">After traversal:</text>
+  <text x="430" y="400" text-anchor="middle" font-size="12" font-weight="bold" fill="#e67e22">sf.total = 350</text>
+
+  <!-- ===== RIGHT: CountFunctor ===== -->
+  <rect x="572" y="214" width="270" height="200" rx="8" fill="#eafaf1" stroke="#27ae60" stroke-width="1.5"/>
+  <text x="707" y="238" text-anchor="middle" font-size="14" font-weight="bold" fill="#27ae60">CountFunctor</text>
+  <text x="707" y="254" text-anchor="middle" font-size="11" fill="#888">Stateful &#x2014; counts nodes</text>
+
+  <!-- Call -->
+  <rect x="592" y="266" width="230" height="22" rx="4" fill="#f4ecf7" stroke="#8e44ad" stroke-width="1"/>
+  <text x="707" y="282" text-anchor="middle" font-size="11" font-family="Consolas, 'Courier New', monospace" fill="#8e44ad">tree.inorder_apply(cf);</text>
+
+  <!-- Generated code -->
+  <rect x="592" y="298" width="230" height="62" rx="6" fill="#1e1e1e"/>
+  <text x="607" y="316" fill="#6a9955" font-size="10" font-family="Consolas, 'Courier New', monospace">// compiler generates:</text>
+  <text x="607" y="332" fill="#569cd6" font-size="10" font-family="Consolas, 'Courier New', monospace">void inorder_apply(</text>
+  <text x="617" y="348" fill="#4ec9b0" font-size="10" font-family="Consolas, 'Courier New', monospace">CountFunctor<tspan fill="#d4d4d4">&amp; func) { ... }</tspan></text>
+
+  <!-- Result -->
+  <text x="707" y="382" text-anchor="middle" font-size="11" fill="#555">After traversal:</text>
+  <text x="707" y="400" text-anchor="middle" font-size="12" font-weight="bold" fill="#27ae60">cf.count = 7</text>
+
+  <!-- ===== Key insight box ===== -->
+  <rect x="30" y="430" width="800" height="80" rx="8" fill="#f4ecf7" stroke="#8e44ad" stroke-width="1.5"/>
+  <text x="430" y="456" text-anchor="middle" font-size="14" font-weight="bold" fill="#8e44ad">How Templates Work Here</text>
+  <text x="50" y="478" font-size="12" fill="#555">
+    You write <tspan font-weight="bold">one</tspan> template. Each time you call it with a different functor type, the compiler
+    creates a <tspan font-weight="bold">specialized copy</tspan> with that type filled in.
+  </text>
+  <text x="50" y="498" font-size="12" fill="#555">
+    The traversal logic is identical in all three &#x2014; only the functor type (and its <tspan font-family="Consolas, 'Courier New', monospace">operator()</tspan>) differs.
+  </text>
+
+  <!-- ===== Footer ===== -->
+  <rect x="30" y="526" width="800" height="40" rx="8" fill="#ecf0f1" stroke="#bdc3c7" stroke-width="1"/>
+  <text x="430" y="551" text-anchor="middle" font-size="12" fill="#555">
+    All three functors are defined in <tspan font-family="Consolas, 'Courier New', monospace" font-weight="bold">Functors.h</tspan> &#x2014; see functor_diagrams.md for how each one works.
+  </text>
+</svg>

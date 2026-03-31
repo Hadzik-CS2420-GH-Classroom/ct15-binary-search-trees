@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 360" font-family="'Segoe UI', Arial, sans-serif">
+  <rect width="100%" height="100%" fill="white"/>
+
+  <!-- Title -->
+  <text x="430" y="28" text-anchor="middle" font-size="24" font-weight="bold" fill="#2c3e50">PrintFunctor</text>
+  <text x="430" y="48" text-anchor="middle" font-size="13" fill="#888">Stateless &#x2014; prints each value, no data accumulated between calls</text>
+
+  <!-- Code -->
+  <rect x="30" y="68" width="400" height="100" rx="6" fill="#1e1e1e"/>
+  <text x="50" y="90" fill="#569cd6" font-size="12" font-family="Consolas, 'Courier New', monospace">struct <tspan fill="#4ec9b0">PrintFunctor</tspan> {</text>
+  <text x="70" y="112" fill="#569cd6" font-size="12" font-family="Consolas, 'Courier New', monospace">void <tspan fill="#dcdcaa">operator()</tspan>(<tspan fill="#569cd6">int</tspan> <tspan fill="#9cdcfe">value</tspan>) {</text>
+  <text x="90" y="134" fill="#9cdcfe" font-size="12" font-family="Consolas, 'Courier New', monospace">std::cout &lt;&lt; value &lt;&lt; <tspan fill="#ce9178">" "</tspan>;</text>
+  <text x="70" y="152" fill="#d4d4d4" font-size="12" font-family="Consolas, 'Courier New', monospace">}</text>
+  <text x="50" y="162" fill="#d4d4d4" font-size="12" font-family="Consolas, 'Courier New', monospace">};</text>
+
+  <!-- Annotations -->
+  <rect x="460" y="68" width="370" height="100" rx="8" fill="#eaf2f8" stroke="#3498db" stroke-width="1.5"/>
+  <text x="480" y="92" font-size="13" font-weight="bold" fill="#3498db">What&#x2019;s happening:</text>
+  <text x="480" y="114" font-size="12" fill="#555">&#x2022; No member variables &#x2014; no state to track</text>
+  <text x="480" y="134" font-size="12" fill="#555">&#x2022; Each call just prints the value and a space</text>
+  <text x="480" y="154" font-size="12" fill="#555">&#x2022; After traversal, output is on the screen &#x2014; nothing to read back</text>
+
+  <!-- Trace: calling with tree values 20, 30, 40, 50, 60, 70, 80 -->
+  <text x="430" y="200" text-anchor="middle" font-size="14" font-weight="bold" fill="#2c3e50">Trace: tree.inorder_apply(pf)</text>
+
+  <rect x="50" y="216" width="54" height="34" rx="4" fill="#3498db" stroke="#2980b9" stroke-width="1"/>
+  <text x="77" y="238" text-anchor="middle" font-size="12" font-weight="bold" fill="white">20</text>
+  <rect x="112" y="216" width="54" height="34" rx="4" fill="#3498db" stroke="#2980b9" stroke-width="1"/>
+  <text x="139" y="238" text-anchor="middle" font-size="12" font-weight="bold" fill="white">30</text>
+  <rect x="174" y="216" width="54" height="34" rx="4" fill="#3498db" stroke="#2980b9" stroke-width="1"/>
+  <text x="201" y="238" text-anchor="middle" font-size="12" font-weight="bold" fill="white">40</text>
+  <rect x="236" y="216" width="54" height="34" rx="4" fill="#3498db" stroke="#2980b9" stroke-width="1"/>
+  <text x="263" y="238" text-anchor="middle" font-size="12" font-weight="bold" fill="white">50</text>
+  <rect x="298" y="216" width="54" height="34" rx="4" fill="#3498db" stroke="#2980b9" stroke-width="1"/>
+  <text x="325" y="238" text-anchor="middle" font-size="12" font-weight="bold" fill="white">60</text>
+  <rect x="360" y="216" width="54" height="34" rx="4" fill="#3498db" stroke="#2980b9" stroke-width="1"/>
+  <text x="387" y="238" text-anchor="middle" font-size="12" font-weight="bold" fill="white">70</text>
+  <rect x="422" y="216" width="54" height="34" rx="4" fill="#3498db" stroke="#2980b9" stroke-width="1"/>
+  <text x="449" y="238" text-anchor="middle" font-size="12" font-weight="bold" fill="white">80</text>
+
+  <text x="50" y="272" font-size="12" fill="#555">Screen output: <tspan font-family="Consolas, 'Courier New', monospace" font-weight="bold" fill="#3498db">20 30 40 50 60 70 80</tspan></text>
+  <text x="50" y="292" font-size="12" fill="#888">Same result as calling inorder() &#x2014; but now through a functor.</text>
+
+  <!-- Footer -->
+  <rect x="30" y="310" width="800" height="36" rx="8" fill="#ecf0f1" stroke="#bdc3c7" stroke-width="1"/>
+  <text x="430" y="333" text-anchor="middle" font-size="12" fill="#555">
+    PrintFunctor behaves identically to <tspan font-family="Consolas, 'Courier New', monospace">inorder()</tspan>. Its purpose is to show that a functor <tspan font-weight="bold">can</tspan> replace hardcoded behavior.
+  </text>
+</svg>

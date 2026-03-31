@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 680" font-family="'Segoe UI', Arial, sans-serif">
+  <rect width="100%" height="100%" fill="white"/>
+
+  <!-- Title -->
+  <text x="450" y="32" text-anchor="middle" fill="#1a1a1a" font-size="24" font-weight="bold">Why Public + Private Helpers?</text>
+  <text x="450" y="56" text-anchor="middle" fill="#777" font-size="13">The public method is the clean door; the private helper does the recursive work</text>
+
+  <!-- ===== THE PROBLEM ===== -->
+  <rect x="30" y="76" width="840" height="80" rx="10" fill="#fdedec" stroke="#e74c3c" stroke-width="1.5"/>
+  <text x="450" y="100" text-anchor="middle" fill="#922b21" font-size="15" font-weight="bold">The Problem</text>
+  <text x="450" y="122" text-anchor="middle" fill="#555" font-size="13">Recursive BST operations need a <tspan font-weight="bold" fill="#c0392b">node pointer</tspan> to know where they are in the tree.</text>
+  <text x="450" y="142" text-anchor="middle" fill="#555" font-size="13">But the user shouldn&#x2019;t have to pass <tspan font-family="Consolas, monospace" fill="#c0392b">root_</tspan> every time &#x2014; that&#x2019;s an internal detail.</text>
+
+  <!-- ===== TWO-LAYER DIAGRAM ===== -->
+  <!-- Public layer -->
+  <rect x="30" y="180" width="340" height="220" rx="12" fill="#eaf2f8" stroke="#2980b9" stroke-width="2"/>
+  <rect x="30" y="180" width="340" height="34" rx="12" fill="#2980b9"/>
+  <rect x="30" y="198" width="340" height="16" fill="#2980b9"/>
+  <text x="200" y="202" text-anchor="middle" fill="#fff" font-size="14" font-weight="bold">public: (what users call)</text>
+
+  <text x="50" y="236" fill="#1a5276" font-size="13" font-weight="bold">void</text>
+  <text x="82" y="236" fill="#2980b9" font-size="13" font-weight="bold" font-family="Consolas, monospace">insert(int value)</text>
+  <text x="50" y="258" fill="#1a5276" font-size="13" font-weight="bold">bool</text>
+  <text x="82" y="258" fill="#2980b9" font-size="13" font-weight="bold" font-family="Consolas, monospace">search(int value)</text>
+  <text x="50" y="280" fill="#1a5276" font-size="13" font-weight="bold">void</text>
+  <text x="82" y="280" fill="#2980b9" font-size="13" font-weight="bold" font-family="Consolas, monospace">inorder()</text>
+  <text x="50" y="302" fill="#1a5276" font-size="13" font-weight="bold">void</text>
+  <text x="82" y="302" fill="#2980b9" font-size="13" font-weight="bold" font-family="Consolas, monospace">preorder()</text>
+  <text x="50" y="324" fill="#1a5276" font-size="13" font-weight="bold">void</text>
+  <text x="82" y="324" fill="#2980b9" font-size="13" font-weight="bold" font-family="Consolas, monospace">postorder()</text>
+  <text x="50" y="346" fill="#1a5276" font-size="13" font-weight="bold">int</text>
+  <text x="82" y="346" fill="#2980b9" font-size="13" font-weight="bold" font-family="Consolas, monospace">height()</text>
+  <text x="50" y="378" fill="#888" font-size="11" font-style="italic">Simple params: just the value (or nothing)</text>
+  <text x="50" y="393" fill="#888" font-size="11" font-style="italic">No node pointer &#x2014; user never sees root_</text>
+
+  <!-- Arrow -->
+  <text x="450" y="278" text-anchor="middle" fill="#27ae60" font-size="12" font-weight="bold">delegates to</text>
+  <defs>
+    <marker id="arrowG" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#27ae60"/>
+    </marker>
+  </defs>
+  <line x1="395" y1="296" x2="490" y2="296" stroke="#27ae60" stroke-width="3" marker-end="url(#arrowG)"/>
+
+  <!-- Private layer -->
+  <rect x="510" y="180" width="370" height="220" rx="12" fill="#fef9e7" stroke="#e67e22" stroke-width="2"/>
+  <rect x="510" y="180" width="370" height="34" rx="12" fill="#e67e22"/>
+  <rect x="510" y="198" width="370" height="16" fill="#e67e22"/>
+  <text x="695" y="202" text-anchor="middle" fill="#fff" font-size="14" font-weight="bold">private: (recursive helpers)</text>
+
+  <text x="530" y="236" fill="#784212" font-size="13" font-weight="bold">Node*</text>
+  <text x="574" y="236" fill="#e67e22" font-size="13" font-weight="bold" font-family="Consolas, monospace">insert_(Node* node, int val)</text>
+  <text x="530" y="258" fill="#784212" font-size="13" font-weight="bold">bool</text>
+  <text x="562" y="258" fill="#e67e22" font-size="13" font-weight="bold" font-family="Consolas, monospace">search_(Node* node, int val)</text>
+  <text x="530" y="280" fill="#784212" font-size="13" font-weight="bold">void</text>
+  <text x="562" y="280" fill="#e67e22" font-size="13" font-weight="bold" font-family="Consolas, monospace">inorder_(Node* node)</text>
+  <text x="530" y="302" fill="#784212" font-size="13" font-weight="bold">void</text>
+  <text x="562" y="302" fill="#e67e22" font-size="13" font-weight="bold" font-family="Consolas, monospace">preorder_(Node* node)</text>
+  <text x="530" y="324" fill="#784212" font-size="13" font-weight="bold">void</text>
+  <text x="562" y="324" fill="#e67e22" font-size="13" font-weight="bold" font-family="Consolas, monospace">postorder_(Node* node)</text>
+  <text x="530" y="346" fill="#784212" font-size="13" font-weight="bold">int</text>
+  <text x="562" y="346" fill="#e67e22" font-size="13" font-weight="bold" font-family="Consolas, monospace">height_(Node* node)</text>
+  <text x="530" y="378" fill="#888" font-size="11" font-style="italic">Extra param: Node* &#x2014; knows where in the tree</text>
+  <text x="530" y="393" fill="#888" font-size="11" font-style="italic">Calls itself recursively on left/right children</text>
+
+  <!-- ===== CODE EXAMPLE ===== -->
+  <rect x="30" y="420" width="340" height="100" rx="8" fill="#1e1e1e"/>
+  <text x="50" y="444" fill="#6a9955" font-size="12" font-family="Consolas, monospace">// User writes:</text>
+  <text x="50" y="464" fill="#9cdcfe" font-size="12" font-family="Consolas, monospace">bst.<tspan fill="#dcdcaa">insert</tspan>(<tspan fill="#b5cea8">50</tspan>);</text>
+  <text x="50" y="484" fill="#9cdcfe" font-size="12" font-family="Consolas, monospace">bst.<tspan fill="#dcdcaa">inorder</tspan>();</text>
+  <text x="50" y="506" fill="#6a9955" font-size="12" font-family="Consolas, monospace">// Clean, simple &#x2014; no root_ exposure</text>
+
+  <rect x="510" y="420" width="370" height="100" rx="8" fill="#1e1e1e"/>
+  <text x="530" y="444" fill="#6a9955" font-size="12" font-family="Consolas, monospace">// Public wrapper body:</text>
+  <text x="530" y="464" fill="#569cd6" font-size="12" font-family="Consolas, monospace">void <tspan fill="#dcdcaa">insert</tspan>(<tspan fill="#569cd6">int</tspan> <tspan fill="#9cdcfe">value</tspan>) {</text>
+  <text x="550" y="484" fill="#9cdcfe" font-size="12" font-family="Consolas, monospace">root_ = <tspan fill="#dcdcaa">insert_</tspan>(root_, value);</text>
+  <text x="530" y="504" fill="#569cd6" font-size="12" font-family="Consolas, monospace">} <tspan fill="#6a9955">// passes root_ to start recursion</tspan></text>
+
+  <!-- ===== WHY THIS PATTERN? ===== -->
+  <rect x="30" y="540" width="840" height="126" rx="10" fill="#eafaf1" stroke="#27ae60" stroke-width="1.5"/>
+  <text x="450" y="564" text-anchor="middle" fill="#1a5e32" font-size="15" font-weight="bold">Why This Pattern?</text>
+
+  <text x="80" y="590" fill="#1a5e32" font-size="13" font-weight="bold">1. Encapsulation</text>
+  <text x="230" y="590" fill="#555" font-size="13">Users never see <tspan font-family="Consolas, monospace">root_</tspan> or <tspan font-family="Consolas, monospace">Node*</tspan> &#x2014; the tree&#x2019;s internal structure is hidden</text>
+
+  <text x="80" y="614" fill="#1a5e32" font-size="13" font-weight="bold">2. Recursion needs a starting point</text>
+  <text x="310" y="614" fill="#555" font-size="13">Private helpers take <tspan font-family="Consolas, monospace">Node*</tspan> so they can recurse on <tspan font-family="Consolas, monospace">node&#x2192;left</tspan> / <tspan font-family="Consolas, monospace">node&#x2192;right</tspan></text>
+
+  <text x="80" y="638" fill="#1a5e32" font-size="13" font-weight="bold">3. Naming convention</text>
+  <text x="260" y="638" fill="#555" font-size="13">Trailing underscore <tspan font-family="Consolas, monospace" fill="#e67e22">insert_</tspan> signals &#x201C;private helper&#x201D; &#x2014; matches <tspan font-family="Consolas, monospace" fill="#e67e22">root_</tspan> convention</text>
+
+  <text x="80" y="662" fill="#1a5e32" font-size="13" font-weight="bold">4. Common C++ pattern</text>
+  <text x="270" y="662" fill="#555" font-size="13">Used in STL containers, game engines, and production code &#x2014; you&#x2019;ll see this everywhere</text>
+</svg>

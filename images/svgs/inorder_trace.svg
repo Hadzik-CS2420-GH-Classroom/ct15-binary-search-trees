@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 600" font-family="'Segoe UI', Arial, sans-serif">
+  <rect width="100%" height="100%" fill="white"/>
+
+  <!-- Title -->
+  <text x="430" y="28" text-anchor="middle" font-size="24" font-weight="bold" fill="#2c3e50">inorder_() &#x2014; Code + Recursion Trace</text>
+  <text x="430" y="48" text-anchor="middle" font-size="13" fill="#888">Left &#x2192; Print &#x2192; Right &#x2014; the print happens in the MIDDLE</text>
+
+  <!-- ===== CODE BLOCK (left) ===== -->
+  <rect x="30" y="66" width="340" height="110" rx="8" fill="#1e1e1e"/>
+  <text font-family="Consolas, 'Courier New', monospace" font-size="11">
+    <tspan x="50" y="88" fill="#569cd6">void</tspan><tspan fill="#dcdcaa"> inorder_</tspan><tspan fill="#d4d4d4">(</tspan><tspan fill="#4ec9b0">Node</tspan><tspan fill="#d4d4d4">* </tspan><tspan fill="#9cdcfe">node</tspan><tspan fill="#d4d4d4">) </tspan><tspan fill="#569cd6">const</tspan><tspan fill="#d4d4d4"> {</tspan>
+    <tspan x="70" y="108" fill="#c586c0">if</tspan><tspan fill="#d4d4d4"> (!</tspan><tspan fill="#9cdcfe">node</tspan><tspan fill="#d4d4d4">) </tspan><tspan fill="#c586c0">return</tspan><tspan fill="#d4d4d4">;</tspan><tspan fill="#6a9955">             // base case</tspan>
+    <tspan x="70" y="128" fill="#dcdcaa">inorder_</tspan><tspan fill="#d4d4d4">(node-></tspan><tspan fill="#9cdcfe">left</tspan><tspan fill="#d4d4d4">);</tspan><tspan fill="#6a9955">        // 1. left subtree</tspan>
+    <tspan x="70" y="148" fill="#9cdcfe">std::cout</tspan><tspan fill="#d4d4d4"> &lt;&lt; node-></tspan><tspan fill="#9cdcfe">data</tspan><tspan fill="#d4d4d4">;</tspan><tspan fill="#6a9955">  // 2. PRINT (middle)</tspan>
+    <tspan x="70" y="168" fill="#dcdcaa">inorder_</tspan><tspan fill="#d4d4d4">(node-></tspan><tspan fill="#9cdcfe">right</tspan><tspan fill="#d4d4d4">);</tspan><tspan fill="#6a9955">       // 3. right subtree</tspan>
+  </text>
+
+  <!-- ===== TREE (right): 50,30,70,20,40 ===== -->
+  <text x="580" y="80" text-anchor="middle" font-size="13" font-weight="bold" fill="#888">Tree:</text>
+  <line x1="580" y1="114" x2="520" y2="142" stroke="#bdc3c7" stroke-width="2"/>
+  <line x1="580" y1="114" x2="640" y2="142" stroke="#bdc3c7" stroke-width="2"/>
+  <line x1="520" y1="178" x2="490" y2="200" stroke="#bdc3c7" stroke-width="1.5"/>
+  <line x1="520" y1="178" x2="550" y2="200" stroke="#bdc3c7" stroke-width="1.5"/>
+  <circle cx="580" cy="98" r="18" fill="#27ae60" stroke="#219a52" stroke-width="1.5"/>
+  <text x="580" y="103" text-anchor="middle" font-size="12" font-weight="bold" fill="white">50</text>
+  <circle cx="520" cy="160" r="18" fill="#27ae60" stroke="#219a52" stroke-width="1.5"/>
+  <text x="520" y="165" text-anchor="middle" font-size="12" font-weight="bold" fill="white">30</text>
+  <circle cx="640" cy="160" r="18" fill="#27ae60" stroke="#219a52" stroke-width="1.5"/>
+  <text x="640" y="165" text-anchor="middle" font-size="12" font-weight="bold" fill="white">70</text>
+  <circle cx="490" cy="216" r="18" fill="#27ae60" stroke="#219a52" stroke-width="1.5"/>
+  <text x="490" y="221" text-anchor="middle" font-size="12" font-weight="bold" fill="white">20</text>
+  <circle cx="550" cy="216" r="18" fill="#27ae60" stroke="#219a52" stroke-width="1.5"/>
+  <text x="550" y="221" text-anchor="middle" font-size="12" font-weight="bold" fill="white">40</text>
+
+  <text x="720" y="100" font-size="12" fill="#555">Output:</text>
+  <text x="720" y="118" font-size="14" font-weight="bold" fill="#27ae60">20 30 40 50 70</text>
+
+  <!-- ===== CALL STACK TRACE ===== -->
+  <text x="430" y="254" text-anchor="middle" font-size="15" font-weight="bold" fill="#2c3e50">Call Stack: inorder_(50)</text>
+
+  <rect x="30" y="266" width="800" height="24" rx="4" fill="#eaf2f8" stroke="#3498db" stroke-width="1"/>
+  <text x="44" y="283" font-size="11" font-weight="bold" fill="#3498db">&#x2460;</text>
+  <text x="62" y="283" font-size="11" font-family="Consolas, 'Courier New', monospace" fill="#555">inorder_(<tspan fill="#3498db" font-weight="bold">50</tspan>)</text>
+  <text x="300" y="283" font-size="11" fill="#888">step 1: call inorder_(left = 30)</text>
+
+  <rect x="50" y="294" width="780" height="24" rx="4" fill="#eaf2f8" stroke="#3498db" stroke-width="1"/>
+  <text x="64" y="311" font-size="11" font-weight="bold" fill="#3498db">&#x2461;</text>
+  <text x="86" y="311" font-size="11" font-family="Consolas, 'Courier New', monospace" fill="#555">inorder_(<tspan fill="#3498db" font-weight="bold">30</tspan>)</text>
+  <text x="300" y="311" font-size="11" fill="#888">step 1: call inorder_(left = 20)</text>
+
+  <rect x="70" y="322" width="760" height="24" rx="4" fill="#eaf2f8" stroke="#3498db" stroke-width="1"/>
+  <text x="84" y="339" font-size="11" font-weight="bold" fill="#3498db">&#x2462;</text>
+  <text x="106" y="339" font-size="11" font-family="Consolas, 'Courier New', monospace" fill="#555">inorder_(<tspan fill="#3498db" font-weight="bold">20</tspan>)</text>
+  <text x="300" y="339" font-size="11" fill="#888">step 1: inorder_(nullptr) &#x2192; return</text>
+
+  <rect x="70" y="350" width="760" height="24" rx="4" fill="#eafaf1" stroke="#27ae60" stroke-width="2"/>
+  <text x="84" y="367" font-size="11" font-weight="bold" fill="#27ae60">&#x2463;</text>
+  <text x="106" y="367" font-size="11" font-family="Consolas, 'Courier New', monospace" fill="#555">step 2: <tspan fill="#27ae60" font-weight="bold">print 20</tspan></text>
+  <text x="300" y="367" font-size="11" fill="#888">step 3: inorder_(nullptr) &#x2192; return. Done with 20.</text>
+
+  <rect x="50" y="378" width="780" height="24" rx="4" fill="#eafaf1" stroke="#27ae60" stroke-width="2"/>
+  <text x="64" y="395" font-size="11" font-weight="bold" fill="#27ae60">&#x2464;</text>
+  <text x="86" y="395" font-size="11" font-family="Consolas, 'Courier New', monospace" fill="#555">back to <tspan fill="#3498db" font-weight="bold">30</tspan>: step 2: <tspan fill="#27ae60" font-weight="bold">print 30</tspan></text>
+  <text x="400" y="395" font-size="11" fill="#888">step 3: call inorder_(right = 40)</text>
+
+  <rect x="70" y="406" width="760" height="24" rx="4" fill="#eaf2f8" stroke="#3498db" stroke-width="1"/>
+  <text x="84" y="423" font-size="11" font-weight="bold" fill="#3498db">&#x2465;</text>
+  <text x="106" y="423" font-size="11" font-family="Consolas, 'Courier New', monospace" fill="#555">inorder_(<tspan fill="#3498db" font-weight="bold">40</tspan>)</text>
+  <text x="300" y="423" font-size="11" fill="#888">step 1: inorder_(nullptr) &#x2192; return</text>
+
+  <rect x="70" y="434" width="760" height="24" rx="4" fill="#eafaf1" stroke="#27ae60" stroke-width="2"/>
+  <text x="84" y="451" font-size="11" font-weight="bold" fill="#27ae60">&#x2466;</text>
+  <text x="106" y="451" font-size="11" font-family="Consolas, 'Courier New', monospace" fill="#555">step 2: <tspan fill="#27ae60" font-weight="bold">print 40</tspan></text>
+  <text x="300" y="451" font-size="11" fill="#888">step 3: inorder_(nullptr) &#x2192; return. Done with 40.</text>
+
+  <rect x="30" y="462" width="800" height="24" rx="4" fill="#eafaf1" stroke="#27ae60" stroke-width="2"/>
+  <text x="44" y="479" font-size="11" font-weight="bold" fill="#27ae60">&#x2467;</text>
+  <text x="62" y="479" font-size="11" font-family="Consolas, 'Courier New', monospace" fill="#555">back to <tspan fill="#3498db" font-weight="bold">50</tspan>: step 2: <tspan fill="#27ae60" font-weight="bold">print 50</tspan></text>
+  <text x="400" y="479" font-size="11" fill="#888">step 3: call inorder_(right = 70)</text>
+
+  <rect x="50" y="490" width="780" height="24" rx="4" fill="#eaf2f8" stroke="#3498db" stroke-width="1"/>
+  <text x="64" y="507" font-size="11" font-weight="bold" fill="#3498db">&#x2468;</text>
+  <text x="86" y="507" font-size="11" font-family="Consolas, 'Courier New', monospace" fill="#555">inorder_(<tspan fill="#3498db" font-weight="bold">70</tspan>): nullptrs both sides &#x2192; <tspan fill="#27ae60" font-weight="bold">print 70</tspan></text>
+
+  <!-- Footer -->
+  <rect x="30" y="528" width="800" height="58" rx="8" fill="#ecf0f1" stroke="#bdc3c7" stroke-width="1"/>
+  <text x="430" y="552" text-anchor="middle" font-size="12" fill="#555">
+    Print always happens <tspan font-weight="bold">between</tspan> left and right calls. The left subtree (20, 30, 40) is fully
+  </text>
+  <text x="430" y="572" text-anchor="middle" font-size="12" fill="#555">
+    processed before the root (50) prints. Output is sorted: <tspan font-weight="bold" fill="#27ae60">20 30 40 50 70</tspan>
+  </text>
+</svg>

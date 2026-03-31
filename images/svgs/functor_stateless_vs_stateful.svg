@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 500" font-family="'Segoe UI', Arial, sans-serif">
+  <rect width="100%" height="100%" fill="white"/>
+
+  <!-- Title -->
+  <text x="430" y="28" text-anchor="middle" font-size="24" font-weight="bold" fill="#2c3e50">Stateless vs Stateful Functors</text>
+  <text x="430" y="48" text-anchor="middle" font-size="13" fill="#888">A stateless functor does the same thing every time; a stateful functor accumulates results</text>
+
+  <!-- ===== LEFT: Stateless (PrintFunctor) ===== -->
+  <rect x="30" y="72" width="390" height="340" rx="8" fill="#eaf2f8" stroke="#3498db" stroke-width="1.5"/>
+  <text x="225" y="96" text-anchor="middle" font-size="16" font-weight="bold" fill="#3498db">Stateless: PrintFunctor</text>
+  <text x="225" y="114" text-anchor="middle" font-size="11" fill="#888">No member variables &#x2014; every call is independent</text>
+
+  <!-- Code -->
+  <rect x="50" y="126" width="350" height="62" rx="6" fill="#1e1e1e"/>
+  <text x="65" y="148" fill="#569cd6" font-size="12" font-family="Consolas, 'Courier New', monospace">struct <tspan fill="#4ec9b0">PrintFunctor</tspan> {</text>
+  <text x="80" y="168" fill="#569cd6" font-size="12" font-family="Consolas, 'Courier New', monospace">void <tspan fill="#dcdcaa">operator()</tspan>(<tspan fill="#569cd6">int</tspan> <tspan fill="#9cdcfe">val</tspan>) { cout &lt;&lt; val &lt;&lt; <tspan fill="#ce9178">" "</tspan>; }</text>
+  <text x="65" y="184" fill="#d4d4d4" font-size="12" font-family="Consolas, 'Courier New', monospace">};</text>
+
+  <!-- Call trace -->
+  <text x="50" y="216" font-size="12" font-weight="bold" fill="#3498db">Each call:</text>
+
+  <rect x="50" y="228" width="160" height="36" rx="4" fill="white" stroke="#3498db" stroke-width="1"/>
+  <text x="130" y="244" text-anchor="middle" font-size="11" font-family="Consolas, 'Courier New', monospace" fill="#555">pf(20)</text>
+  <text x="130" y="258" text-anchor="middle" font-size="10" fill="#3498db">prints: 20</text>
+
+  <rect x="220" y="228" width="160" height="36" rx="4" fill="white" stroke="#3498db" stroke-width="1"/>
+  <text x="300" y="244" text-anchor="middle" font-size="11" font-family="Consolas, 'Courier New', monospace" fill="#555">pf(30)</text>
+  <text x="300" y="258" text-anchor="middle" font-size="10" fill="#3498db">prints: 30</text>
+
+  <rect x="50" y="272" width="160" height="36" rx="4" fill="white" stroke="#3498db" stroke-width="1"/>
+  <text x="130" y="288" text-anchor="middle" font-size="11" font-family="Consolas, 'Courier New', monospace" fill="#555">pf(40)</text>
+  <text x="130" y="302" text-anchor="middle" font-size="10" fill="#3498db">prints: 40</text>
+
+  <!-- No connection between calls -->
+  <text x="225" y="334" text-anchor="middle" font-size="12" fill="#555">
+    Each call stands alone &#x2014; <tspan font-weight="bold">no memory</tspan>
+  </text>
+
+  <text x="225" y="358" text-anchor="middle" font-size="13" font-weight="bold" fill="#3498db">Screen: 20 30 40</text>
+  <text x="225" y="378" text-anchor="middle" font-size="11" fill="#888">Same behavior as inorder() &#x2014; just prints</text>
+  <text x="225" y="396" text-anchor="middle" font-size="11" fill="#888">Nothing to read back after traversal</text>
+
+  <!-- ===== RIGHT: Stateful (SumFunctor) ===== -->
+  <rect x="440" y="72" width="390" height="340" rx="8" fill="#fef9e7" stroke="#f39c12" stroke-width="1.5"/>
+  <text x="635" y="96" text-anchor="middle" font-size="16" font-weight="bold" fill="#e67e22">Stateful: SumFunctor</text>
+  <text x="635" y="114" text-anchor="middle" font-size="11" fill="#888">Has a member variable &#x2014; accumulates across calls</text>
+
+  <!-- Code -->
+  <rect x="460" y="126" width="350" height="62" rx="6" fill="#1e1e1e"/>
+  <text x="475" y="148" fill="#569cd6" font-size="12" font-family="Consolas, 'Courier New', monospace">struct <tspan fill="#4ec9b0">SumFunctor</tspan> {</text>
+  <text x="490" y="168" fill="#569cd6" font-size="12" font-family="Consolas, 'Courier New', monospace">int <tspan fill="#9cdcfe">total</tspan> = <tspan fill="#b5cea8">0</tspan>;  void <tspan fill="#dcdcaa">operator()</tspan>(<tspan fill="#569cd6">int</tspan> <tspan fill="#9cdcfe">val</tspan>) { <tspan fill="#9cdcfe">total</tspan> += <tspan fill="#9cdcfe">val</tspan>; }</text>
+  <text x="475" y="184" fill="#d4d4d4" font-size="12" font-family="Consolas, 'Courier New', monospace">};</text>
+
+  <!-- Call trace with state -->
+  <text x="460" y="216" font-size="12" font-weight="bold" fill="#e67e22">Each call updates total:</text>
+
+  <rect x="460" y="228" width="160" height="36" rx="4" fill="white" stroke="#f39c12" stroke-width="1"/>
+  <text x="540" y="244" text-anchor="middle" font-size="11" font-family="Consolas, 'Courier New', monospace" fill="#555">sf(20)</text>
+  <text x="540" y="258" text-anchor="middle" font-size="10" fill="#e67e22">total: 0 &#x2192; 20</text>
+
+  <text x="628" y="250" font-size="12" fill="#e67e22">&#x2192;</text>
+
+  <rect x="640" y="228" width="160" height="36" rx="4" fill="white" stroke="#f39c12" stroke-width="1"/>
+  <text x="720" y="244" text-anchor="middle" font-size="11" font-family="Consolas, 'Courier New', monospace" fill="#555">sf(30)</text>
+  <text x="720" y="258" text-anchor="middle" font-size="10" fill="#e67e22">total: 20 &#x2192; 50</text>
+
+  <text x="560" y="284" font-size="12" fill="#e67e22">&#x2192;</text>
+
+  <rect x="460" y="272" width="160" height="36" rx="4" fill="white" stroke="#f39c12" stroke-width="1"/>
+  <text x="540" y="288" text-anchor="middle" font-size="11" font-family="Consolas, 'Courier New', monospace" fill="#555">sf(40)</text>
+  <text x="540" y="302" text-anchor="middle" font-size="10" fill="#e67e22">total: 50 &#x2192; 90</text>
+
+  <!-- State persists between calls shown with arrow -->
+  <text x="635" y="334" text-anchor="middle" font-size="12" fill="#555">
+    State <tspan font-weight="bold">carries over</tspan> &#x2014; each call builds on the last
+  </text>
+
+  <text x="635" y="358" text-anchor="middle" font-size="13" font-weight="bold" fill="#e67e22">sf.total = 90</text>
+  <text x="635" y="378" text-anchor="middle" font-size="11" fill="#888">Read the result AFTER traversal completes</text>
+  <text x="635" y="396" text-anchor="middle" font-size="11" fill="#888">Works because functor is passed by reference</text>
+
+  <!-- ===== Footer: Why this matters ===== -->
+  <rect x="30" y="428" width="800" height="58" rx="8" fill="#ecf0f1" stroke="#bdc3c7" stroke-width="1"/>
+  <text x="430" y="452" text-anchor="middle" font-size="13" font-weight="bold" fill="#2c3e50">Why This Matters</text>
+  <text x="430" y="472" text-anchor="middle" font-size="12" fill="#555">
+    We write the traversal logic <tspan font-weight="bold">once</tspan>. The functor controls what happens at each node: print, sum, count, find max, collect into a vector...
+  </text>
+</svg>

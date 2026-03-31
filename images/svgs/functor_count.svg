@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 380" font-family="'Segoe UI', Arial, sans-serif">
+  <rect width="100%" height="100%" fill="white"/>
+
+  <!-- Title -->
+  <text x="430" y="28" text-anchor="middle" font-size="24" font-weight="bold" fill="#2c3e50">CountFunctor</text>
+  <text x="430" y="48" text-anchor="middle" font-size="13" fill="#888">Stateful &#x2014; counts how many nodes are visited, ignores the actual values</text>
+
+  <!-- Code -->
+  <rect x="30" y="68" width="400" height="136" rx="6" fill="#1e1e1e"/>
+  <text x="50" y="90" fill="#569cd6" font-size="12" font-family="Consolas, 'Courier New', monospace">struct <tspan fill="#4ec9b0">CountFunctor</tspan> {</text>
+  <text x="70" y="112" fill="#569cd6" font-size="12" font-family="Consolas, 'Courier New', monospace">int <tspan fill="#9cdcfe">count</tspan> = <tspan fill="#b5cea8">0</tspan>;</text>
+  <text x="70" y="134" fill="#569cd6" font-size="12" font-family="Consolas, 'Courier New', monospace">void <tspan fill="#dcdcaa">operator()</tspan>(<tspan fill="#569cd6">int</tspan> <tspan fill="#9cdcfe">value</tspan>) {</text>
+  <text x="90" y="156" fill="#d4d4d4" font-size="12" font-family="Consolas, 'Courier New', monospace">(<tspan fill="#569cd6">void</tspan>)value;  <tspan fill="#6a9955">// unused</tspan></text>
+  <text x="90" y="176" fill="#9cdcfe" font-size="12" font-family="Consolas, 'Courier New', monospace">count++;</text>
+  <text x="70" y="192" fill="#d4d4d4" font-size="12" font-family="Consolas, 'Courier New', monospace">}</text>
+  <text x="50" y="200" fill="#d4d4d4" font-size="12" font-family="Consolas, 'Courier New', monospace">};</text>
+
+  <!-- Annotations -->
+  <rect x="460" y="68" width="370" height="136" rx="8" fill="#eafaf1" stroke="#27ae60" stroke-width="1.5"/>
+  <text x="480" y="92" font-size="13" font-weight="bold" fill="#27ae60">What&#x2019;s happening:</text>
+  <text x="480" y="114" font-size="12" fill="#555">&#x2022; <tspan font-family="Consolas, 'Courier New', monospace" font-weight="bold">int count = 0</tspan> &#x2014; tracks number of visits</text>
+  <text x="480" y="134" font-size="12" fill="#555">&#x2022; <tspan font-family="Consolas, 'Courier New', monospace">(void)value</tspan> &#x2014; tells the compiler we</text>
+  <text x="489" y="150" font-size="12" fill="#555">intentionally don&#x2019;t use the value parameter</text>
+  <text x="480" y="170" font-size="12" fill="#555">&#x2022; Just increments count on every call</text>
+  <text x="480" y="190" font-size="12" fill="#555">&#x2022; Read <tspan font-family="Consolas, 'Courier New', monospace">cf.count</tspan> after traversal for total nodes</text>
+
+  <!-- Trace -->
+  <text x="430" y="236" text-anchor="middle" font-size="14" font-weight="bold" fill="#2c3e50">Trace: tree.inorder_apply(cf)</text>
+
+  <rect x="80" y="252" width="68" height="46" rx="4" fill="#eafaf1" stroke="#27ae60" stroke-width="1"/>
+  <text x="114" y="270" text-anchor="middle" font-size="10" font-family="Consolas, 'Courier New', monospace" fill="#555">cf(20)</text>
+  <text x="114" y="288" text-anchor="middle" font-size="12" font-weight="bold" fill="#27ae60">count=1</text>
+
+  <text x="156" y="280" font-size="14" fill="#bdc3c7">&#x2192;</text>
+
+  <rect x="170" y="252" width="68" height="46" rx="4" fill="#eafaf1" stroke="#27ae60" stroke-width="1"/>
+  <text x="204" y="270" text-anchor="middle" font-size="10" font-family="Consolas, 'Courier New', monospace" fill="#555">cf(30)</text>
+  <text x="204" y="288" text-anchor="middle" font-size="12" font-weight="bold" fill="#27ae60">count=2</text>
+
+  <text x="246" y="280" font-size="14" fill="#bdc3c7">&#x2192;</text>
+
+  <rect x="260" y="252" width="68" height="46" rx="4" fill="#eafaf1" stroke="#27ae60" stroke-width="1"/>
+  <text x="294" y="270" text-anchor="middle" font-size="10" font-family="Consolas, 'Courier New', monospace" fill="#555">cf(40)</text>
+  <text x="294" y="288" text-anchor="middle" font-size="12" font-weight="bold" fill="#27ae60">count=3</text>
+
+  <text x="336" y="280" font-size="14" fill="#bdc3c7">&#x2192;</text>
+
+  <text x="360" y="280" font-size="14" fill="#888">...</text>
+
+  <text x="384" y="280" font-size="14" fill="#bdc3c7">&#x2192;</text>
+
+  <rect x="398" y="252" width="68" height="46" rx="4" fill="#eafaf1" stroke="#27ae60" stroke-width="1"/>
+  <text x="432" y="270" text-anchor="middle" font-size="10" font-family="Consolas, 'Courier New', monospace" fill="#555">cf(80)</text>
+  <text x="432" y="288" text-anchor="middle" font-size="12" font-weight="bold" fill="#27ae60">count=7</text>
+
+  <!-- Final result -->
+  <text x="50" y="324" font-size="12" fill="#555">After traversal: <tspan font-family="Consolas, 'Courier New', monospace" font-weight="bold" fill="#27ae60">cf.count = 7</tspan>  (one increment per node, value doesn&#x2019;t matter)</text>
+
+  <!-- Footer -->
+  <rect x="30" y="344" width="800" height="26" rx="8" fill="#ecf0f1" stroke="#bdc3c7" stroke-width="1"/>
+  <text x="430" y="362" text-anchor="middle" font-size="12" fill="#555">
+    Shows that a functor doesn&#x2019;t have to use the value at all &#x2014; <tspan font-family="Consolas, 'Courier New', monospace">operator()</tspan> just needs to accept it.
+  </text>
+</svg>

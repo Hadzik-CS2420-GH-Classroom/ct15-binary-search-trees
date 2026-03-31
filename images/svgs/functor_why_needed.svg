@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 560" font-family="'Segoe UI', Arial, sans-serif">
+  <rect width="100%" height="100%" fill="white"/>
+
+  <!-- Title -->
+  <text x="430" y="28" text-anchor="middle" font-size="24" font-weight="bold" fill="#2c3e50">Why Do We Need Functors?</text>
+  <text x="430" y="48" text-anchor="middle" font-size="13" fill="#888">We already have inorder() &#x2014; but it can only print. What if we want to do more?</text>
+
+  <!-- ===== THE PROBLEM ===== -->
+  <rect x="30" y="70" width="800" height="130" rx="8" fill="#fdf2e9" stroke="#e67e22" stroke-width="1.5"/>
+  <text x="50" y="94" font-size="15" font-weight="bold" fill="#e67e22">The Problem: Our Traversals Are Locked to Printing</text>
+
+  <text x="50" y="120" font-size="12" fill="#555">
+    We already wrote <tspan font-family="Consolas, 'Courier New', monospace" font-weight="bold">inorder()</tspan> &#x2014; it walks the tree and prints every value. It works great.
+  </text>
+  <text x="50" y="142" font-size="12" fill="#555">
+    But what if we want to <tspan font-weight="bold">sum</tspan> all the values? Or <tspan font-weight="bold">count</tspan> the nodes? Or <tspan font-weight="bold">find the max</tspan>?
+  </text>
+  <text x="50" y="164" font-size="12" fill="#555">
+    Do we copy-paste the traversal code and change one line each time? That&#x2019;s three nearly identical functions.
+  </text>
+  <text x="50" y="188" font-size="12" fill="#e74c3c" font-weight="bold">
+    The traversal logic (left, visit, right) is always the same &#x2014; only the action at each node changes.
+  </text>
+
+  <!-- ===== BEFORE: Copy-paste approach ===== -->
+  <rect x="30" y="216" width="385" height="172" rx="8" fill="#eaf2f8" stroke="#3498db" stroke-width="1.5"/>
+  <text x="222" y="240" text-anchor="middle" font-size="14" font-weight="bold" fill="#e74c3c">&#x2717; Without Functors: Copy-Paste</text>
+
+  <rect x="50" y="252" width="345" height="126" rx="6" fill="#1e1e1e"/>
+  <text x="65" y="272" fill="#6a9955" font-size="11" font-family="Consolas, 'Courier New', monospace">// to print:</text>
+  <text x="65" y="288" fill="#dcdcaa" font-size="11" font-family="Consolas, 'Courier New', monospace">inorder_print(node)  { <tspan fill="#6a9955">...print...</tspan> }</text>
+  <text x="65" y="310" fill="#6a9955" font-size="11" font-family="Consolas, 'Courier New', monospace">// to sum:</text>
+  <text x="65" y="326" fill="#dcdcaa" font-size="11" font-family="Consolas, 'Courier New', monospace">inorder_sum(node)    { <tspan fill="#6a9955">...sum...</tspan> }</text>
+  <text x="65" y="348" fill="#6a9955" font-size="11" font-family="Consolas, 'Courier New', monospace">// to count:</text>
+  <text x="65" y="364" fill="#dcdcaa" font-size="11" font-family="Consolas, 'Courier New', monospace">inorder_count(node)  { <tspan fill="#6a9955">...count...</tspan> }</text>
+
+  <!-- ===== AFTER: Functor approach ===== -->
+  <rect x="445" y="216" width="385" height="172" rx="8" fill="#eafaf1" stroke="#27ae60" stroke-width="1.5"/>
+  <text x="637" y="240" text-anchor="middle" font-size="14" font-weight="bold" fill="#27ae60">&#x2713; With Functors: Write Once</text>
+
+  <rect x="465" y="252" width="345" height="126" rx="6" fill="#1e1e1e"/>
+  <text x="480" y="272" fill="#6a9955" font-size="11" font-family="Consolas, 'Courier New', monospace">// ONE traversal method:</text>
+  <text x="480" y="288" fill="#dcdcaa" font-size="11" font-family="Consolas, 'Courier New', monospace">inorder_apply(func) { <tspan fill="#6a9955">...func(node)...</tspan> }</text>
+  <text x="480" y="316" fill="#6a9955" font-size="11" font-family="Consolas, 'Courier New', monospace">// swap the functor to change behavior:</text>
+  <text x="480" y="332" fill="#9cdcfe" font-size="11" font-family="Consolas, 'Courier New', monospace">tree.inorder_apply(printFunctor);</text>
+  <text x="480" y="348" fill="#9cdcfe" font-size="11" font-family="Consolas, 'Courier New', monospace">tree.inorder_apply(sumFunctor);</text>
+  <text x="480" y="364" fill="#9cdcfe" font-size="11" font-family="Consolas, 'Courier New', monospace">tree.inorder_apply(countFunctor);</text>
+
+  <!-- ===== VS divider ===== -->
+  <text x="430" y="306" text-anchor="middle" font-size="16" font-weight="bold" fill="#bdc3c7">vs</text>
+
+  <!-- ===== THIS WORKS FOR ANY TRAVERSAL ===== -->
+  <rect x="30" y="404" width="800" height="80" rx="8" fill="#f4ecf7" stroke="#8e44ad" stroke-width="1.5"/>
+  <text x="430" y="428" text-anchor="middle" font-size="14" font-weight="bold" fill="#8e44ad">This Pattern Works for Any Traversal</text>
+
+  <text x="50" y="452" font-size="12" fill="#555">
+    We implement <tspan font-family="Consolas, 'Courier New', monospace" font-weight="bold">inorder_apply</tspan> because in-order is the most useful BST traversal (sorted output).
+  </text>
+  <text x="50" y="472" font-size="12" fill="#555">
+    The same idea applies to pre-order and post-order &#x2014; you could write
+    <tspan font-family="Consolas, 'Courier New', monospace">preorder_apply</tspan> and <tspan font-family="Consolas, 'Courier New', monospace">postorder_apply</tspan>
+  </text>
+
+  <!-- ===== Footer ===== -->
+  <rect x="30" y="500" width="800" height="46" rx="8" fill="#ecf0f1" stroke="#bdc3c7" stroke-width="1"/>
+  <text x="430" y="520" text-anchor="middle" font-size="13" font-weight="bold" fill="#2c3e50">
+    The traversal controls the <tspan fill="#3498db">order</tspan>. The functor controls the <tspan fill="#e67e22">action</tspan>.
+  </text>
+  <text x="430" y="536" text-anchor="middle" font-size="12" fill="#888">
+    Separate concerns: one piece of code for walking, another for what happens at each node.
+  </text>
+</svg>

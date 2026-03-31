@@ -1,0 +1,123 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 680" font-family="'Segoe UI', Arial, sans-serif">
+  <rect width="100%" height="100%" fill="white"/>
+
+  <!-- Title -->
+  <text x="430" y="28" text-anchor="middle" font-size="24" font-weight="bold" fill="#2c3e50">height_() &#x2014; Recursion Trace</text>
+  <text x="430" y="48" text-anchor="middle" font-size="13" fill="#888">Bottom-up: nullptr returns &#x2212;1, each node computes 1 + max(left, right)</text>
+
+  <!-- ===== CODE BLOCK (left) ===== -->
+  <rect x="30" y="66" width="360" height="100" rx="8" fill="#1e1e1e"/>
+  <text font-family="Consolas, 'Courier New', monospace" font-size="11">
+    <tspan x="50" y="88" fill="#569cd6">int</tspan><tspan fill="#dcdcaa"> height_</tspan><tspan fill="#d4d4d4">(</tspan><tspan fill="#4ec9b0">Node</tspan><tspan fill="#d4d4d4">* </tspan><tspan fill="#9cdcfe">node</tspan><tspan fill="#d4d4d4">) </tspan><tspan fill="#569cd6">const</tspan><tspan fill="#d4d4d4"> {</tspan>
+    <tspan x="70" y="108" fill="#c586c0">if</tspan><tspan fill="#d4d4d4"> (!</tspan><tspan fill="#9cdcfe">node</tspan><tspan fill="#d4d4d4">) </tspan><tspan fill="#c586c0">return</tspan><tspan fill="#b5cea8"> -1</tspan><tspan fill="#d4d4d4">;</tspan><tspan fill="#6a9955">          // base case</tspan>
+    <tspan x="70" y="128" fill="#c586c0">return</tspan><tspan fill="#b5cea8"> 1</tspan><tspan fill="#d4d4d4"> + </tspan><tspan fill="#dcdcaa">std::max</tspan><tspan fill="#d4d4d4">(</tspan>
+    <tspan x="90" y="148" fill="#dcdcaa">height_</tspan><tspan fill="#d4d4d4">(node-></tspan><tspan fill="#9cdcfe">left</tspan><tspan fill="#d4d4d4">),</tspan><tspan fill="#6a9955">  // left height</tspan>
+    <tspan x="90" y="158" fill="#dcdcaa">height_</tspan><tspan fill="#d4d4d4">(node-></tspan><tspan fill="#9cdcfe">right</tspan><tspan fill="#d4d4d4">));</tspan><tspan fill="#6a9955"> // right height</tspan>
+  </text>
+
+  <!-- ===== TREE (right): 50,30,70,20,40 ===== -->
+  <text x="600" y="80" text-anchor="middle" font-size="13" font-weight="bold" fill="#888">Tree:</text>
+  <line x1="600" y1="114" x2="540" y2="142" stroke="#bdc3c7" stroke-width="2"/>
+  <line x1="600" y1="114" x2="660" y2="142" stroke="#bdc3c7" stroke-width="2"/>
+  <line x1="540" y1="178" x2="510" y2="200" stroke="#bdc3c7" stroke-width="1.5"/>
+  <line x1="540" y1="178" x2="570" y2="200" stroke="#bdc3c7" stroke-width="1.5"/>
+  <circle cx="600" cy="98" r="18" fill="#3498db" stroke="#2980b9" stroke-width="1.5"/>
+  <text x="600" y="103" text-anchor="middle" font-size="12" font-weight="bold" fill="white">50</text>
+  <text x="624" y="94" font-size="10" font-weight="bold" fill="#e74c3c">h=2</text>
+  <circle cx="540" cy="160" r="18" fill="#27ae60" stroke="#219a52" stroke-width="1.5"/>
+  <text x="540" y="165" text-anchor="middle" font-size="12" font-weight="bold" fill="white">30</text>
+  <text x="564" y="156" font-size="10" font-weight="bold" fill="#e74c3c">h=1</text>
+  <circle cx="660" cy="160" r="18" fill="#f39c12" stroke="#d68910" stroke-width="1.5"/>
+  <text x="660" y="165" text-anchor="middle" font-size="12" font-weight="bold" fill="white">70</text>
+  <text x="684" y="156" font-size="10" font-weight="bold" fill="#e74c3c">h=0</text>
+  <circle cx="510" cy="216" r="18" fill="#f39c12" stroke="#d68910" stroke-width="1.5"/>
+  <text x="510" y="221" text-anchor="middle" font-size="12" font-weight="bold" fill="white">20</text>
+  <text x="534" y="212" font-size="10" font-weight="bold" fill="#e74c3c">h=0</text>
+  <circle cx="570" cy="216" r="18" fill="#f39c12" stroke="#d68910" stroke-width="1.5"/>
+  <text x="570" y="221" text-anchor="middle" font-size="12" font-weight="bold" fill="white">40</text>
+  <text x="594" y="212" font-size="10" font-weight="bold" fill="#e74c3c">h=0</text>
+
+  <!-- Key -->
+  <circle cx="720" y="100" r="8" fill="#f39c12" stroke="#d68910" stroke-width="1"/>
+  <text x="734" y="104" font-size="10" fill="#555">Leaf (h=0)</text>
+  <circle cx="720" cy="120" r="8" fill="#27ae60" stroke="#219a52" stroke-width="1"/>
+  <text x="734" y="124" font-size="10" fill="#555">Internal (h=1)</text>
+  <circle cx="720" cy="140" r="8" fill="#3498db" stroke="#2980b9" stroke-width="1"/>
+  <text x="734" y="144" font-size="10" fill="#555">Root (h=2)</text>
+
+  <!-- ===== CALL STACK TRACE ===== -->
+  <text x="430" y="252" text-anchor="middle" font-size="15" font-weight="bold" fill="#2c3e50">Call Stack: height_(50)</text>
+
+  <!-- height_(50) -->
+  <rect x="30" y="264" width="800" height="24" rx="4" fill="#eaf2f8" stroke="#3498db" stroke-width="1"/>
+  <text x="44" y="281" font-size="11" font-weight="bold" fill="#3498db">&#x2460;</text>
+  <text x="62" y="281" font-size="11" font-family="Consolas, 'Courier New', monospace" fill="#555">height_(<tspan fill="#3498db" font-weight="bold">50</tspan>)</text>
+  <text x="300" y="281" font-size="11" fill="#888">needs max(height_(left=30), height_(right=70))</text>
+
+  <!--   height_(30) -->
+  <rect x="50" y="292" width="780" height="24" rx="4" fill="#eaf2f8" stroke="#3498db" stroke-width="1"/>
+  <text x="64" y="309" font-size="11" font-weight="bold" fill="#3498db">&#x2461;</text>
+  <text x="86" y="309" font-size="11" font-family="Consolas, 'Courier New', monospace" fill="#555">height_(<tspan fill="#27ae60" font-weight="bold">30</tspan>)</text>
+  <text x="300" y="309" font-size="11" fill="#888">needs max(height_(left=20), height_(right=40))</text>
+
+  <!--     height_(20) -->
+  <rect x="70" y="320" width="760" height="24" rx="4" fill="#eaf2f8" stroke="#3498db" stroke-width="1"/>
+  <text x="84" y="337" font-size="11" font-weight="bold" fill="#3498db">&#x2462;</text>
+  <text x="106" y="337" font-size="11" font-family="Consolas, 'Courier New', monospace" fill="#555">height_(<tspan fill="#f39c12" font-weight="bold">20</tspan>)</text>
+  <text x="300" y="337" font-size="11" fill="#888">needs max(height_(nullptr), height_(nullptr))</text>
+
+  <!--       nullptr, nullptr -->
+  <rect x="90" y="348" width="740" height="22" rx="4" fill="#fef9e7" stroke="#f39c12" stroke-width="1"/>
+  <text x="104" y="364" font-size="11" fill="#e67e22">&#x2463; height_(nullptr) &#x2192; <tspan font-weight="bold">&#x2212;1</tspan>, height_(nullptr) &#x2192; <tspan font-weight="bold">&#x2212;1</tspan></text>
+
+  <!--     20 computes -->
+  <rect x="70" y="374" width="760" height="24" rx="4" fill="#fdf2e9" stroke="#e67e22" stroke-width="1.5"/>
+  <text x="84" y="391" font-size="11" font-weight="bold" fill="#e67e22">&#x2464;</text>
+  <text x="106" y="391" font-size="11" font-family="Consolas, 'Courier New', monospace" fill="#555">height_(20) = 1 + max(&#x2212;1, &#x2212;1) = 1 + (&#x2212;1) = <tspan fill="#e74c3c" font-weight="bold">0</tspan></text>
+  <text x="520" y="391" font-size="11" fill="#888">leaf &#x2192; returns 0</text>
+
+  <!--     height_(40) -->
+  <rect x="70" y="402" width="760" height="24" rx="4" fill="#eaf2f8" stroke="#3498db" stroke-width="1"/>
+  <text x="84" y="419" font-size="11" font-weight="bold" fill="#3498db">&#x2465;</text>
+  <text x="106" y="419" font-size="11" font-family="Consolas, 'Courier New', monospace" fill="#555">height_(<tspan fill="#f39c12" font-weight="bold">40</tspan>): both children nullptr</text>
+
+  <!--     40 computes -->
+  <rect x="70" y="430" width="760" height="24" rx="4" fill="#fdf2e9" stroke="#e67e22" stroke-width="1.5"/>
+  <text x="84" y="447" font-size="11" font-weight="bold" fill="#e67e22">&#x2466;</text>
+  <text x="106" y="447" font-size="11" font-family="Consolas, 'Courier New', monospace" fill="#555">height_(40) = 1 + max(&#x2212;1, &#x2212;1) = 1 + (&#x2212;1) = <tspan fill="#e74c3c" font-weight="bold">0</tspan></text>
+  <text x="520" y="447" font-size="11" fill="#888">leaf &#x2192; returns 0</text>
+
+  <!--   30 computes -->
+  <rect x="50" y="458" width="780" height="24" rx="4" fill="#fdf2e9" stroke="#e67e22" stroke-width="1.5"/>
+  <text x="64" y="475" font-size="11" font-weight="bold" fill="#e67e22">&#x2467;</text>
+  <text x="86" y="475" font-size="11" font-family="Consolas, 'Courier New', monospace" fill="#555">height_(30) = 1 + max(<tspan fill="#e74c3c">0</tspan>, <tspan fill="#e74c3c">0</tspan>) = 1 + 0 = <tspan fill="#e74c3c" font-weight="bold">1</tspan></text>
+  <text x="520" y="475" font-size="11" fill="#888">internal node &#x2192; returns 1</text>
+
+  <!--   height_(70) -->
+  <rect x="50" y="490" width="780" height="24" rx="4" fill="#eaf2f8" stroke="#3498db" stroke-width="1"/>
+  <text x="64" y="507" font-size="11" font-weight="bold" fill="#3498db">&#x2468;</text>
+  <text x="86" y="507" font-size="11" font-family="Consolas, 'Courier New', monospace" fill="#555">height_(<tspan fill="#f39c12" font-weight="bold">70</tspan>): both children nullptr</text>
+
+  <!--   70 computes -->
+  <rect x="50" y="518" width="780" height="24" rx="4" fill="#fdf2e9" stroke="#e67e22" stroke-width="1.5"/>
+  <text x="64" y="535" font-size="11" font-weight="bold" fill="#e67e22">&#x2469;</text>
+  <text x="86" y="535" font-size="11" font-family="Consolas, 'Courier New', monospace" fill="#555">height_(70) = 1 + max(&#x2212;1, &#x2212;1) = 1 + (&#x2212;1) = <tspan fill="#e74c3c" font-weight="bold">0</tspan></text>
+  <text x="520" y="535" font-size="11" fill="#888">leaf &#x2192; returns 0</text>
+
+  <!-- 50 computes -->
+  <rect x="30" y="550" width="800" height="28" rx="4" fill="#eafaf1" stroke="#27ae60" stroke-width="2"/>
+  <text x="44" y="569" font-size="11" font-weight="bold" fill="#27ae60">&#x246A;</text>
+  <text x="66" y="569" font-size="11" font-family="Consolas, 'Courier New', monospace" fill="#555">height_(50) = 1 + max(<tspan fill="#e74c3c">1</tspan>, <tspan fill="#e74c3c">0</tspan>) = 1 + 1 = <tspan fill="#27ae60" font-weight="bold">2</tspan></text>
+  <text x="520" y="569" font-size="11" fill="#27ae60">root height &#x2192; returned to caller &#x2713;</text>
+
+  <!-- Footer -->
+  <rect x="30" y="592" width="800" height="76" rx="8" fill="#ecf0f1" stroke="#bdc3c7" stroke-width="1"/>
+  <text x="430" y="614" text-anchor="middle" font-size="13" font-weight="bold" fill="#2c3e50">Key Pattern: Bottom-Up Computation</text>
+  <text x="80" y="636" font-size="12" fill="#555">
+    Unlike insert/search (which go top-down and stop), height must visit <tspan font-weight="bold">every</tspan> node.
+  </text>
+  <text x="80" y="656" font-size="12" fill="#555">
+    Results flow <tspan font-weight="bold">upward</tspan>: leaves return 0, each parent adds 1 + max of its children.
+    The root&#x2019;s answer depends on <tspan font-weight="bold">all</tspan> nodes below it.
+  </text>
+</svg>

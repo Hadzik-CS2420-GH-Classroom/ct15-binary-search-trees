@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 596" font-family="'Segoe UI', Arial, sans-serif">
+  <rect width="100%" height="100%" fill="white"/>
+
+  <!-- Title -->
+  <text x="430" y="28" text-anchor="middle" font-size="24" font-weight="bold" fill="#2c3e50">What Is a Functor?</text>
+  <text x="430" y="48" text-anchor="middle" font-size="13" fill="#888">A struct that overloads operator() &#x2014; it&#x2019;s an object you can call like a function</text>
+
+  <!-- ===== LEFT: Regular function ===== -->
+  <rect x="30" y="72" width="380" height="196" rx="8" fill="#eaf2f8" stroke="#3498db" stroke-width="1.5"/>
+  <text x="220" y="96" text-anchor="middle" font-size="15" font-weight="bold" fill="#3498db">Regular Function</text>
+
+  <rect x="50" y="110" width="340" height="96" rx="6" fill="#1e1e1e"/>
+  <text x="65" y="130" fill="#6a9955" font-size="12" font-family="Consolas, 'Courier New', monospace">// need a global to keep state</text>
+  <text x="65" y="148" fill="#569cd6" font-size="12" font-family="Consolas, 'Courier New', monospace">int <tspan fill="#9cdcfe">total</tspan> = <tspan fill="#b5cea8">0</tspan>;</text>
+  <text x="65" y="166" fill="#569cd6" font-size="12" font-family="Consolas, 'Courier New', monospace">void <tspan fill="#dcdcaa">add_to_total</tspan>(<tspan fill="#569cd6">int</tspan> <tspan fill="#9cdcfe">val</tspan>) {</text>
+  <text x="80" y="184" fill="#9cdcfe" font-size="12" font-family="Consolas, 'Courier New', monospace">total += val;</text>
+  <text x="65" y="202" fill="#d4d4d4" font-size="12" font-family="Consolas, 'Courier New', monospace">}</text>
+
+  <text x="50" y="226" font-size="12" fill="#555">Called like: <tspan font-family="Consolas, 'Courier New', monospace" fill="#333">add_to_total(10);</tspan></text>
+  <text x="50" y="244" font-size="12" fill="#e74c3c">Requires a global variable to keep a running total</text>
+  <text x="50" y="260" font-size="12" fill="#e74c3c">Can&#x2019;t have two independent sums at the same time</text>
+
+  <!-- ===== RIGHT: Functor ===== -->
+  <rect x="450" y="72" width="380" height="196" rx="8" fill="#fef9e7" stroke="#f39c12" stroke-width="1.5"/>
+  <text x="640" y="96" text-anchor="middle" font-size="15" font-weight="bold" fill="#e67e22">Functor (Function Object)</text>
+
+  <rect x="470" y="110" width="340" height="96" rx="6" fill="#1e1e1e"/>
+  <text x="485" y="130" fill="#569cd6" font-size="12" font-family="Consolas, 'Courier New', monospace">struct <tspan fill="#4ec9b0">SumFunctor</tspan> {</text>
+  <text x="500" y="148" fill="#569cd6" font-size="12" font-family="Consolas, 'Courier New', monospace">int <tspan fill="#9cdcfe">total</tspan> = <tspan fill="#b5cea8">0</tspan>;</text>
+  <text x="500" y="166" fill="#569cd6" font-size="12" font-family="Consolas, 'Courier New', monospace">void <tspan fill="#dcdcaa">operator()</tspan>(<tspan fill="#569cd6">int</tspan> <tspan fill="#9cdcfe">val</tspan>) {</text>
+  <text x="520" y="184" fill="#9cdcfe" font-size="12" font-family="Consolas, 'Courier New', monospace">total += val;</text>
+  <text x="500" y="198" fill="#d4d4d4" font-size="12" font-family="Consolas, 'Courier New', monospace">}</text>
+
+  <text x="470" y="226" font-size="12" fill="#555">Called like: <tspan font-family="Consolas, 'Courier New', monospace" fill="#333">sum(10);</tspan>  &#x2190; looks just like a function call</text>
+  <text x="470" y="244" font-size="12" fill="#27ae60">State lives inside the object &#x2014; no globals needed</text>
+  <text x="470" y="260" font-size="12" fill="#27ae60">Can have multiple independent sums at once</text>
+
+  <!-- ===== VS divider ===== -->
+  <text x="430" y="170" text-anchor="middle" font-size="16" font-weight="bold" fill="#bdc3c7">vs</text>
+
+  <!-- ===== THE KEY INSIGHT: struct vs functor ===== -->
+  <rect x="30" y="288" width="800" height="120" rx="8" fill="#f4ecf7" stroke="#8e44ad" stroke-width="1.5"/>
+  <text x="430" y="314" text-anchor="middle" font-size="14" font-weight="bold" fill="#8e44ad">A Functor IS a Struct &#x2014; With One Special Method</text>
+
+  <text x="80" y="340" font-size="12" fill="#555">
+    A <tspan font-weight="bold">functor</tspan> is not a new keyword or special type. It&#x2019;s just a <tspan font-weight="bold">struct</tspan> (or class) that defines
+    <tspan font-family="Consolas, 'Courier New', monospace" font-weight="bold" fill="#8e44ad">operator()</tspan>.
+  </text>
+  <text x="80" y="360" font-size="12" fill="#555">
+    That one method makes the object <tspan font-weight="bold">callable</tspan>: <tspan font-family="Consolas, 'Courier New', monospace" fill="#333">SumFunctor sum;  sum(10);</tspan>
+  </text>
+  <text x="80" y="380" font-size="12" fill="#555">
+    <tspan font-family="Consolas, 'Courier New', monospace" fill="#888">sum(10)</tspan><tspan fill="#888"> is shorthand for </tspan><tspan font-family="Consolas, 'Courier New', monospace" fill="#888">sum.operator()(10)</tspan><tspan fill="#888"> &#x2014; C++ calls it automatically.</tspan>
+  </text>
+  <text x="80" y="400" font-size="12" fill="#8e44ad" font-weight="bold">
+    Node is a struct without operator() &#x2192; NOT callable. SumFunctor has operator() &#x2192; callable. That&#x2019;s the only difference.
+  </text>
+
+  <!-- ===== Step-by-step state trace ===== -->
+  <text x="430" y="442" text-anchor="middle" font-size="15" font-weight="bold" fill="#2c3e50">How State Accumulates</text>
+  <text x="430" y="460" text-anchor="middle" font-size="12" fill="#888">Each call updates the functor&#x2019;s member variable &#x2014; it remembers</text>
+
+  <!-- State boxes -->
+  <rect x="60" y="476" width="120" height="50" rx="6" fill="#ecf0f1" stroke="#bdc3c7" stroke-width="1"/>
+  <text x="120" y="496" text-anchor="middle" font-size="11" font-family="Consolas, 'Courier New', monospace" fill="#555">SumFunctor sum;</text>
+  <text x="120" y="516" text-anchor="middle" font-size="13" font-weight="bold" fill="#8e44ad">total = 0</text>
+
+  <text x="196" y="506" font-size="16" fill="#bdc3c7">&#x2192;</text>
+
+  <rect x="212" y="476" width="120" height="50" rx="6" fill="#fef9e7" stroke="#f39c12" stroke-width="1"/>
+  <text x="272" y="496" text-anchor="middle" font-size="11" font-family="Consolas, 'Courier New', monospace" fill="#555">sum(10);</text>
+  <text x="272" y="516" text-anchor="middle" font-size="13" font-weight="bold" fill="#e67e22">total = 10</text>
+
+  <text x="348" y="506" font-size="16" fill="#bdc3c7">&#x2192;</text>
+
+  <rect x="364" y="476" width="120" height="50" rx="6" fill="#fef9e7" stroke="#f39c12" stroke-width="1"/>
+  <text x="424" y="496" text-anchor="middle" font-size="11" font-family="Consolas, 'Courier New', monospace" fill="#555">sum(20);</text>
+  <text x="424" y="516" text-anchor="middle" font-size="13" font-weight="bold" fill="#e67e22">total = 30</text>
+
+  <text x="500" y="506" font-size="16" fill="#bdc3c7">&#x2192;</text>
+
+  <rect x="516" y="476" width="120" height="50" rx="6" fill="#fef9e7" stroke="#f39c12" stroke-width="1"/>
+  <text x="576" y="496" text-anchor="middle" font-size="11" font-family="Consolas, 'Courier New', monospace" fill="#555">sum(30);</text>
+  <text x="576" y="516" text-anchor="middle" font-size="13" font-weight="bold" fill="#e67e22">total = 60</text>
+
+  <text x="652" y="506" font-size="16" fill="#bdc3c7">&#x2192;</text>
+
+  <rect x="668" y="472" width="148" height="58" rx="6" fill="#eafaf1" stroke="#27ae60" stroke-width="2"/>
+  <text x="742" y="494" text-anchor="middle" font-size="11" font-family="Consolas, 'Courier New', monospace" fill="#555">sum.total</text>
+  <text x="742" y="516" text-anchor="middle" font-size="16" font-weight="bold" fill="#27ae60">60 &#x2713;</text>
+
+  <!-- Footer -->
+  <rect x="30" y="544" width="800" height="38" rx="8" fill="#ecf0f1" stroke="#bdc3c7" stroke-width="1"/>
+  <text x="430" y="568" text-anchor="middle" font-size="12" fill="#555">
+    A functor is called like a function but <tspan font-weight="bold">carries state</tspan>. C++11 lambdas are just anonymous functors &#x2014; same idea, less syntax.
+  </text>
+</svg>

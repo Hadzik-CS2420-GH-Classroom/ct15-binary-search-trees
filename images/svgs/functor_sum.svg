@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 400" font-family="'Segoe UI', Arial, sans-serif">
+  <rect width="100%" height="100%" fill="white"/>
+
+  <!-- Title -->
+  <text x="430" y="28" text-anchor="middle" font-size="24" font-weight="bold" fill="#2c3e50">SumFunctor</text>
+  <text x="430" y="48" text-anchor="middle" font-size="13" fill="#888">Stateful &#x2014; accumulates a running total across every call</text>
+
+  <!-- Code -->
+  <rect x="30" y="68" width="400" height="118" rx="6" fill="#1e1e1e"/>
+  <text x="50" y="90" fill="#569cd6" font-size="12" font-family="Consolas, 'Courier New', monospace">struct <tspan fill="#4ec9b0">SumFunctor</tspan> {</text>
+  <text x="70" y="112" fill="#569cd6" font-size="12" font-family="Consolas, 'Courier New', monospace">int <tspan fill="#9cdcfe">total</tspan> = <tspan fill="#b5cea8">0</tspan>;</text>
+  <text x="70" y="134" fill="#569cd6" font-size="12" font-family="Consolas, 'Courier New', monospace">void <tspan fill="#dcdcaa">operator()</tspan>(<tspan fill="#569cd6">int</tspan> <tspan fill="#9cdcfe">value</tspan>) {</text>
+  <text x="90" y="156" fill="#9cdcfe" font-size="12" font-family="Consolas, 'Courier New', monospace">total += value;</text>
+  <text x="70" y="174" fill="#d4d4d4" font-size="12" font-family="Consolas, 'Courier New', monospace">}</text>
+  <text x="50" y="182" fill="#d4d4d4" font-size="12" font-family="Consolas, 'Courier New', monospace">};</text>
+
+  <!-- Annotations -->
+  <rect x="460" y="68" width="370" height="118" rx="8" fill="#fef9e7" stroke="#f39c12" stroke-width="1.5"/>
+  <text x="480" y="92" font-size="13" font-weight="bold" fill="#e67e22">What&#x2019;s happening:</text>
+  <text x="480" y="114" font-size="12" fill="#555">&#x2022; <tspan font-family="Consolas, 'Courier New', monospace" font-weight="bold">int total = 0</tspan> &#x2014; member variable stores state</text>
+  <text x="480" y="134" font-size="12" fill="#555">&#x2022; Each call adds value to the running total</text>
+  <text x="480" y="154" font-size="12" fill="#555">&#x2022; Passed by reference &#x2014; same object used throughout</text>
+  <text x="480" y="174" font-size="12" fill="#555">&#x2022; Read <tspan font-family="Consolas, 'Courier New', monospace">sf.total</tspan> after traversal to get the result</text>
+
+  <!-- Trace -->
+  <text x="430" y="218" text-anchor="middle" font-size="14" font-weight="bold" fill="#2c3e50">Trace: tree.inorder_apply(sf)</text>
+
+  <!-- State accumulation boxes -->
+  <rect x="36" y="234" width="82" height="46" rx="4" fill="#ecf0f1" stroke="#bdc3c7" stroke-width="1"/>
+  <text x="77" y="252" text-anchor="middle" font-size="10" font-family="Consolas, 'Courier New', monospace" fill="#555">sf(20)</text>
+  <text x="77" y="270" text-anchor="middle" font-size="12" font-weight="bold" fill="#e67e22">total=20</text>
+
+  <text x="126" y="262" font-size="14" fill="#bdc3c7">&#x2192;</text>
+
+  <rect x="140" y="234" width="82" height="46" rx="4" fill="#fef9e7" stroke="#f39c12" stroke-width="1"/>
+  <text x="181" y="252" text-anchor="middle" font-size="10" font-family="Consolas, 'Courier New', monospace" fill="#555">sf(30)</text>
+  <text x="181" y="270" text-anchor="middle" font-size="12" font-weight="bold" fill="#e67e22">total=50</text>
+
+  <text x="230" y="262" font-size="14" fill="#bdc3c7">&#x2192;</text>
+
+  <rect x="244" y="234" width="82" height="46" rx="4" fill="#fef9e7" stroke="#f39c12" stroke-width="1"/>
+  <text x="285" y="252" text-anchor="middle" font-size="10" font-family="Consolas, 'Courier New', monospace" fill="#555">sf(40)</text>
+  <text x="285" y="270" text-anchor="middle" font-size="12" font-weight="bold" fill="#e67e22">total=90</text>
+
+  <text x="334" y="262" font-size="14" fill="#bdc3c7">&#x2192;</text>
+
+  <rect x="348" y="234" width="82" height="46" rx="4" fill="#fef9e7" stroke="#f39c12" stroke-width="1"/>
+  <text x="389" y="252" text-anchor="middle" font-size="10" font-family="Consolas, 'Courier New', monospace" fill="#555">sf(50)</text>
+  <text x="389" y="270" text-anchor="middle" font-size="12" font-weight="bold" fill="#e67e22">total=140</text>
+
+  <text x="438" y="262" font-size="14" fill="#bdc3c7">&#x2192;</text>
+
+  <rect x="452" y="234" width="82" height="46" rx="4" fill="#fef9e7" stroke="#f39c12" stroke-width="1"/>
+  <text x="493" y="252" text-anchor="middle" font-size="10" font-family="Consolas, 'Courier New', monospace" fill="#555">sf(60)</text>
+  <text x="493" y="270" text-anchor="middle" font-size="12" font-weight="bold" fill="#e67e22">total=200</text>
+
+  <text x="542" y="262" font-size="14" fill="#bdc3c7">&#x2192;</text>
+
+  <rect x="556" y="234" width="82" height="46" rx="4" fill="#fef9e7" stroke="#f39c12" stroke-width="1"/>
+  <text x="597" y="252" text-anchor="middle" font-size="10" font-family="Consolas, 'Courier New', monospace" fill="#555">sf(70)</text>
+  <text x="597" y="270" text-anchor="middle" font-size="12" font-weight="bold" fill="#e67e22">total=270</text>
+
+  <text x="646" y="262" font-size="14" fill="#bdc3c7">&#x2192;</text>
+
+  <rect x="660" y="234" width="82" height="46" rx="4" fill="#fef9e7" stroke="#f39c12" stroke-width="1"/>
+  <text x="701" y="252" text-anchor="middle" font-size="10" font-family="Consolas, 'Courier New', monospace" fill="#555">sf(80)</text>
+  <text x="701" y="270" text-anchor="middle" font-size="12" font-weight="bold" fill="#e67e22">total=350</text>
+
+  <!-- Final result -->
+  <text x="50" y="310" font-size="12" fill="#555">After traversal: <tspan font-family="Consolas, 'Courier New', monospace" font-weight="bold" fill="#e67e22">sf.total = 350</tspan>  (20+30+40+50+60+70+80)</text>
+
+  <!-- Footer -->
+  <rect x="30" y="336" width="800" height="50" rx="8" fill="#ecf0f1" stroke="#bdc3c7" stroke-width="1"/>
+  <text x="430" y="356" text-anchor="middle" font-size="12" fill="#555">
+    This is why functors are passed <tspan font-weight="bold">by reference</tspan>: the same <tspan font-family="Consolas, 'Courier New', monospace">sf</tspan> object is used for every call.
+  </text>
+  <text x="430" y="374" text-anchor="middle" font-size="12" fill="#555">
+    If passed by value, each call would get a fresh copy with <tspan font-family="Consolas, 'Courier New', monospace">total = 0</tspan> &#x2014; the sum would be lost.
+  </text>
+</svg>

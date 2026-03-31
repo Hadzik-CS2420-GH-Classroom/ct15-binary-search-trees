@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 590" font-family="'Segoe UI', Arial, sans-serif">
+  <rect width="100%" height="100%" fill="white"/>
+
+  <!-- Title -->
+  <text x="430" y="28" text-anchor="middle" font-size="24" font-weight="bold" fill="#2c3e50">inorder_apply: Template + Functor</text>
+  <text x="430" y="48" text-anchor="middle" font-size="13" fill="#888">A generic traversal that accepts any functor type &#x2014; the recursive helper does the real work</text>
+
+  <!-- ===== WHAT IS template<typename Functor>? ===== -->
+  <rect x="30" y="68" width="800" height="100" rx="8" fill="#f4ecf7" stroke="#8e44ad" stroke-width="1.5"/>
+  <text x="50" y="92" font-size="15" font-weight="bold" fill="#8e44ad">What does template&lt;typename Functor&gt; mean?</text>
+
+  <text x="50" y="116" font-size="12" fill="#555">
+    <tspan font-weight="bold" fill="#8e44ad">template</tspan> tells the compiler: &#x201C;don&#x2019;t compile this yet &#x2014; wait until someone calls it.&#x201D;
+  </text>
+  <text x="50" y="136" font-size="12" fill="#555">
+    <tspan font-weight="bold" fill="#8e44ad">typename Functor</tspan> is a placeholder. When you call <tspan font-family="Consolas, 'Courier New', monospace">tree.inorder_apply(sf)</tspan>,
+    the compiler replaces <tspan font-family="Consolas, 'Courier New', monospace" fill="#8e44ad">Functor</tspan> with <tspan font-family="Consolas, 'Courier New', monospace" fill="#e67e22">SumFunctor</tspan> and generates a specialized version.
+  </text>
+  <text x="50" y="158" font-size="12" fill="#555">
+    Each functor type gets its own copy of the function. That&#x2019;s why the full code must live in the <tspan font-weight="bold">.h file</tspan> &#x2014; the compiler needs to see it.
+  </text>
+
+  <!-- ===== THE RECURSIVE HELPER CODE ===== -->
+  <text x="430" y="196" text-anchor="middle" font-size="14" font-weight="bold" fill="#2c3e50">The Recursive Helper (lives in the .h file, not .cpp)</text>
+
+  <rect x="60" y="208" width="740" height="148" rx="6" fill="#1e1e1e"/>
+  <text x="80" y="230" fill="#569cd6" font-size="12" font-family="Consolas, 'Courier New', monospace">template &lt;<tspan fill="#569cd6">typename</tspan> <tspan fill="#4ec9b0">Functor</tspan>&gt;</text>
+  <text x="80" y="250" fill="#569cd6" font-size="12" font-family="Consolas, 'Courier New', monospace">void <tspan fill="#dcdcaa">inorder_apply_</tspan>(<tspan fill="#4ec9b0">Node</tspan>* <tspan fill="#9cdcfe">node</tspan>, <tspan fill="#4ec9b0">Functor</tspan>&amp; <tspan fill="#9cdcfe">func</tspan>) <tspan fill="#569cd6">const</tspan> { <tspan fill="#6a9955">// &amp; = by reference (keeps state)</tspan></text>
+  <text x="100" y="274" fill="#569cd6" font-size="12" font-family="Consolas, 'Courier New', monospace">if <tspan fill="#d4d4d4">(!</tspan><tspan fill="#9cdcfe">node</tspan><tspan fill="#d4d4d4">)</tspan> return;<tspan fill="#6a9955">                              // base case: fell off the tree</tspan></text>
+  <text x="100" y="298" fill="#dcdcaa" font-size="12" font-family="Consolas, 'Courier New', monospace">inorder_apply_<tspan fill="#d4d4d4">(</tspan><tspan fill="#9cdcfe">node</tspan>-&gt;<tspan fill="#9cdcfe">left</tspan>, <tspan fill="#9cdcfe">func</tspan><tspan fill="#d4d4d4">);</tspan><tspan fill="#6a9955">       // 1. recurse left subtree</tspan></text>
+  <text x="100" y="322" fill="#9cdcfe" font-size="12" font-family="Consolas, 'Courier New', monospace">func<tspan fill="#d4d4d4">(</tspan>node<tspan fill="#d4d4d4">-&gt;</tspan>data<tspan fill="#d4d4d4">);</tspan><tspan fill="#6a9955">                       // 2. call the functor HERE</tspan></text>
+  <text x="100" y="346" fill="#dcdcaa" font-size="12" font-family="Consolas, 'Courier New', monospace">inorder_apply_<tspan fill="#d4d4d4">(</tspan><tspan fill="#9cdcfe">node</tspan>-&gt;<tspan fill="#9cdcfe">right</tspan>, <tspan fill="#9cdcfe">func</tspan><tspan fill="#d4d4d4">);</tspan><tspan fill="#6a9955">      // 3. recurse right subtree</tspan></text>
+  <text x="80" y="352" fill="#d4d4d4" font-size="12" font-family="Consolas, 'Courier New', monospace">}</text>
+
+  <!-- ===== The public wrapper ===== -->
+  <text x="430" y="386" text-anchor="middle" font-size="13" fill="#888">The public method just starts the recursion at root_:</text>
+
+  <rect x="200" y="396" width="460" height="32" rx="6" fill="#1e1e1e"/>
+  <text x="220" y="418" fill="#569cd6" font-size="12" font-family="Consolas, 'Courier New', monospace">void <tspan fill="#dcdcaa">inorder_apply</tspan>(<tspan fill="#4ec9b0">Functor</tspan>&amp; <tspan fill="#9cdcfe">func</tspan>) { inorder_apply_(<tspan fill="#9cdcfe">root_</tspan>, func); }</text>
+
+  <!-- ===== Two info boxes ===== -->
+  <rect x="30" y="446" width="385" height="80" rx="8" fill="#fef9e7" stroke="#f39c12" stroke-width="1.5"/>
+  <text x="222" y="470" text-anchor="middle" font-size="13" font-weight="bold" fill="#e67e22">Why pass by reference (&amp;)?</text>
+  <text x="50" y="492" font-size="12" fill="#555">
+    A stateful functor accumulates results in its member
+  </text>
+  <text x="50" y="510" font-size="12" fill="#555">
+    variables. By reference = <tspan font-weight="bold">same object</tspan>, state kept.
+  </text>
+
+  <rect x="445" y="446" width="385" height="80" rx="8" fill="#eafaf1" stroke="#27ae60" stroke-width="1.5"/>
+  <text x="637" y="470" text-anchor="middle" font-size="13" font-weight="bold" fill="#27ae60">Same structure as inorder_()</text>
+  <text x="465" y="492" font-size="12" fill="#555">
+    Compare to inorder_(): left, <tspan font-weight="bold">print</tspan>, right.
+  </text>
+  <text x="465" y="510" font-size="12" fill="#555">
+    Here it&#x2019;s: left, <tspan font-weight="bold" fill="#e67e22">func()</tspan>, right. Same walk, swappable action.
+  </text>
+
+  <!-- ===== Footer ===== -->
+  <rect x="30" y="542" width="800" height="36" rx="8" fill="#ecf0f1" stroke="#bdc3c7" stroke-width="1"/>
+  <text x="430" y="565" text-anchor="middle" font-size="12" fill="#555">
+    The only difference from <tspan font-family="Consolas, 'Courier New', monospace">inorder_()</tspan> is line 5: <tspan font-family="Consolas, 'Courier New', monospace">cout &lt;&lt; node-&gt;data</tspan> becomes <tspan font-family="Consolas, 'Courier New', monospace" font-weight="bold" fill="#e67e22">func(node-&gt;data)</tspan>
+  </text>
+</svg>

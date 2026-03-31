@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 380" font-family="'Segoe UI', Arial, sans-serif">
+  <rect width="100%" height="100%" fill="white"/>
+
+  <!-- Title -->
+  <text x="430" y="28" text-anchor="middle" font-size="24" font-weight="bold" fill="#2c3e50">Node Structure</text>
+  <text x="430" y="48" text-anchor="middle" font-size="13" fill="#888">Each node holds data, a left pointer (smaller values), and a right pointer (larger values)</text>
+
+  <!-- ===== SINGLE NODE DETAIL (center=430, y=100-220) =====
+       Three-cell box: [left | data | right]
+  -->
+
+  <!-- Main node box -->
+  <rect x="215" y="80" width="430" height="70" rx="8" fill="white" stroke="#2c3e50" stroke-width="2"/>
+
+  <!-- Dividers -->
+  <line x1="358" y1="80" x2="358" y2="150" stroke="#2c3e50" stroke-width="1.5"/>
+  <line x1="502" y1="80" x2="502" y2="150" stroke="#2c3e50" stroke-width="1.5"/>
+
+  <!-- Cell labels (top) -->
+  <text x="286" y="98" text-anchor="middle" font-size="10" fill="#888">Node* left</text>
+  <text x="430" y="98" text-anchor="middle" font-size="10" fill="#888">int data</text>
+  <text x="574" y="98" text-anchor="middle" font-size="10" fill="#888">Node* right</text>
+
+  <!-- Cell values -->
+  <text x="286" y="132" text-anchor="middle" font-size="16" font-weight="bold" fill="#27ae60">&#x2190; smaller</text>
+  <text x="430" y="132" text-anchor="middle" font-size="22" font-weight="bold" fill="#3498db">50</text>
+  <text x="574" y="132" text-anchor="middle" font-size="16" font-weight="bold" fill="#e74c3c">larger &#x2192;</text>
+
+  <!-- ===== EXAMPLE IN CONTEXT: Node 50 with children 30 and 70 ===== -->
+
+  <!-- Arrow from left cell down to node 30 -->
+  <line x1="286" y1="150" x2="200" y2="220" stroke="#27ae60" stroke-width="2"/>
+  <polygon points="196,216 204,224 208,214" fill="#27ae60"/>
+
+  <!-- Arrow from right cell down to node 70 -->
+  <line x1="574" y1="150" x2="660" y2="220" stroke="#e74c3c" stroke-width="2"/>
+  <polygon points="664,216 656,224 652,214" fill="#e74c3c"/>
+
+  <!-- Child node 30 -->
+  <rect x="120" y="224" width="160" height="56" rx="6" fill="white" stroke="#2c3e50" stroke-width="1.5"/>
+  <line x1="173" y1="224" x2="173" y2="280" stroke="#2c3e50" stroke-width="1"/>
+  <line x1="227" y1="224" x2="227" y2="280" stroke="#2c3e50" stroke-width="1"/>
+  <text x="146" y="240" text-anchor="middle" font-size="9" fill="#888">left</text>
+  <text x="200" y="240" text-anchor="middle" font-size="9" fill="#888">data</text>
+  <text x="254" y="240" text-anchor="middle" font-size="9" fill="#888">right</text>
+  <text x="146" y="268" text-anchor="middle" font-size="11" fill="#27ae60">&#x2022;</text>
+  <text x="200" y="268" text-anchor="middle" font-size="16" font-weight="bold" fill="#3498db">30</text>
+  <text x="254" y="268" text-anchor="middle" font-size="11" fill="#e74c3c">&#x2022;</text>
+
+  <!-- Child node 70 -->
+  <rect x="580" y="224" width="160" height="56" rx="6" fill="white" stroke="#2c3e50" stroke-width="1.5"/>
+  <line x1="633" y1="224" x2="633" y2="280" stroke="#2c3e50" stroke-width="1"/>
+  <line x1="687" y1="224" x2="687" y2="280" stroke="#2c3e50" stroke-width="1"/>
+  <text x="606" y="240" text-anchor="middle" font-size="9" fill="#888">left</text>
+  <text x="660" y="240" text-anchor="middle" font-size="9" fill="#888">data</text>
+  <text x="714" y="240" text-anchor="middle" font-size="9" fill="#888">right</text>
+  <text x="606" y="268" text-anchor="middle" font-size="11" fill="#27ae60">&#x2022;</text>
+  <text x="660" y="268" text-anchor="middle" font-size="16" font-weight="bold" fill="#3498db">70</text>
+  <text x="714" y="268" text-anchor="middle" font-size="11" fill="#e74c3c">&#x2022;</text>
+
+  <!-- Relationship labels -->
+  <text x="200" y="300" text-anchor="middle" font-size="12" font-weight="bold" fill="#27ae60">30 &lt; 50</text>
+  <text x="660" y="300" text-anchor="middle" font-size="12" font-weight="bold" fill="#e74c3c">70 &gt; 50</text>
+
+  <!-- ===== Footer: struct code ===== -->
+  <rect x="30" y="320" width="800" height="46" rx="8" fill="#ecf0f1" stroke="#bdc3c7" stroke-width="1"/>
+  <text x="430" y="344" text-anchor="middle" font-size="12" fill="#555" font-family="Consolas, 'Courier New', monospace">
+    struct Node { int data;  Node* left;  Node* right;  Node(int val) : data(val), left(nullptr), right(nullptr) {} };
+  </text>
+</svg>
