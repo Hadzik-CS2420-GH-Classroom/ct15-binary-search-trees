@@ -1,0 +1,252 @@
+<!-- Canvas LMS HTML Fragment -- paste into the Rich Content Editor (HTML view) -->
+
+<h2>&#x1F468;&#x200D;&#x1F4BB; Code-Together 15: Binary Search Trees</h2>
+
+<h3>&#x1F3AF; Overview</h3>
+<p>An in-class code-together activity implementing a <strong>Binary Search Tree (BST)</strong> from scratch using recursive patterns. Students implement <code>BinarySearchTree.cpp</code> guided by the instructor, building insert, search, three traversals (in-order, pre-order, post-order), and height. The activity covers the BST property, why in-order traversal produces sorted output, and introduces functors as a flexible alternative to hardcoded print traversals.</p>
+
+<h3>&#x1F4D6; Learning Objectives</h3>
+<p>By completing this activity, you will be able to:</p>
+<ul>
+    <li>Implement <strong>insert</strong> recursively, understanding that new nodes always become leaves and duplicates are ignored</li>
+    <li>Implement <strong>search</strong> and explain why it is identical to binary search on a sorted array, achieving O(log n) on a balanced tree</li>
+    <li>Implement <strong>in-order traversal</strong> and explain why it produces sorted output given the BST property</li>
+    <li>Implement <strong>pre-order</strong> and <strong>post-order</strong> traversals and identify a real use case for each</li>
+    <li>Implement <strong>height</strong> recursively, using -1 as the base case for nullptr so a leaf has height 0</li>
+    <li>Explain the <strong>public/private helper pattern</strong>: public methods provide a clean interface while private helpers recurse through the tree</li>
+</ul>
+
+<h3>&#x1F680; Getting Started</h3>
+
+<h4>Step 1: Accept the Assignment</h4>
+<p>Click the button below to create your personal repository:</p>
+<p><a style="display: inline-block; padding: 10px 24px; font-size: 1em; font-weight: 600; color: #fff; background-color: #0b874b; border-radius: 4px; text-decoration: none;" href="https://classroom.github.com/a/iSzQv09q" target="_blank" rel="noopener">Accept Assignment on GitHub</a></p>
+
+<div style="padding: 14px 18px; border-radius: 4px; margin-bottom: 16px; background-color: #fcf8e3; border: 1px solid #faebcc; color: #8a6d3b;">
+    <strong>Repository Access Issue?</strong><br />
+    If you don&#x2019;t see the repository after accepting, check your email for the GitHub invite.
+</div>
+
+<h4>Step 2: Clone in Visual Studio</h4>
+<ol>
+    <li>Open <strong>Visual Studio</strong></li>
+    <li>On the start window, click <strong>&#x201C;Clone a repository&#x201D;</strong></li>
+    <li>Paste your repository URL (from GitHub) into the <strong>Repository location</strong> field</li>
+    <li>Choose a local path and click <strong>Clone</strong></li>
+    <li>Visual Studio should automatically detect the CMake project and configure it</li>
+</ol>
+
+<div style="padding: 14px 18px; border-radius: 4px; margin-bottom: 16px; background-color: #d9edf7; border: 1px solid #bce8f1; color: #31708f;">
+    Follow the <strong>Troubleshooting</strong> section at the bottom if CMake does not configure automatically.
+</div>
+
+<h4>Step 3: Wait for CMake Configuration</h4>
+<p>Visual Studio will automatically run CMake. Watch the <strong>Output</strong> window (<em>View &rarr; Output</em>, select <em>&#x201C;Show output from: CMake&#x201D;</em>) until you see:</p>
+<pre style="background-color: #1e1e1e; color: #d4d4d4; padding: 16px 20px; border-radius: 4px; overflow-x: auto; font-family: 'Menlo', 'Monaco', 'Consolas', 'Courier New', monospace; font-size: 0.875em; line-height: 1.6;">CMake generation finished.</pre>
+
+<h3>&#x1F4DD; What You&#x2019;ll Do</h3>
+<p>Open <code>BinarySearchTree.cpp</code> and complete the <code>TODO</code> comments. Each TODO tells you what to write, and the <strong>DISCUSSION</strong> comments explain the &#x201C;why&#x201D; behind the code. The <strong>SEE DIAGRAM</strong> comments point you to visual aids in the <code>images/</code> folder. We&#x2019;ll work through these together in class.</p>
+
+<h3>&#x1F4DA; Teaching Order</h3>
+<p>Work through the files in order:</p>
+
+<h4>1. <code>BinarySearchTree.h</code> &mdash; Node struct and class declaration</h4>
+<p>Walk through the header. Discuss the BST property, the Node struct, and the public/private helper pattern (public wrappers call private recursive helpers).</p>
+<table style="width: 100%; border-collapse: collapse; margin-bottom: 16px;">
+    <thead>
+        <tr>
+            <th style="border: 1px solid #c7cdd1; padding: 10px 14px; text-align: left; background-color: #f5f5f5; font-weight: 700;">Section</th>
+            <th style="border: 1px solid #c7cdd1; padding: 10px 14px; text-align: left; background-color: #f5f5f5; font-weight: 700;">What You&#x2019;ll Learn</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;"><code>struct Node</code></td>
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">Each node holds data + two child pointers; nodes are heap-allocated</td>
+        </tr>
+        <tr style="background-color: #fafafa;">
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">BST Property</td>
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">Left subtree &lt; node &lt; right subtree; holds recursively at every node</td>
+        </tr>
+        <tr>
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">Public/Private Pattern</td>
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">Public <code>insert(int)</code> calls private <code>insert_(Node*, int)</code>; hides tree internals</td>
+        </tr>
+    </tbody>
+</table>
+
+<h4>2. <code>BinarySearchTree.cpp</code> &mdash; Implementations (6 TODOs)</h4>
+<table style="width: 100%; border-collapse: collapse; margin-bottom: 16px;">
+    <thead>
+        <tr>
+            <th style="border: 1px solid #c7cdd1; padding: 10px 14px; text-align: left; background-color: #f5f5f5; font-weight: 700;">Section</th>
+            <th style="border: 1px solid #c7cdd1; padding: 10px 14px; text-align: left; background-color: #f5f5f5; font-weight: 700;">What You&#x2019;ll Learn</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">TODO 1: <code>insert_()</code></td>
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">BST property routes each value left or right; new nodes land as leaves; return-the-node pattern reattaches child pointers</td>
+        </tr>
+        <tr style="background-color: #fafafa;">
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">TODO 2: <code>search_()</code></td>
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">Same logic as binary search; each comparison eliminates one subtree; O(log n) balanced, O(n) degenerate</td>
+        </tr>
+        <tr>
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">TODO 3: <code>inorder_()</code></td>
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">Left &rarr; Root &rarr; Right; produces sorted output by BST property</td>
+        </tr>
+        <tr style="background-color: #fafafa;">
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">TODO 4: <code>preorder_()</code></td>
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">Root &rarr; Left &rarr; Right; root printed first; useful for cloning/serializing</td>
+        </tr>
+        <tr>
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">TODO 5: <code>postorder_()</code></td>
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">Left &rarr; Right &rarr; Root; children before parent; same order as safe deletion</td>
+        </tr>
+        <tr style="background-color: #fafafa;">
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">TODO 6: <code>height_()</code></td>
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">Base case: nullptr returns -1; each node adds 1 + max(left, right); height determines O(log n) vs O(n)</td>
+        </tr>
+    </tbody>
+</table>
+
+<h4>3. <code>main.cpp</code> &mdash; Demo driver (provided)</h4>
+<table style="width: 100%; border-collapse: collapse; margin-bottom: 16px;">
+    <thead>
+        <tr>
+            <th style="border: 1px solid #c7cdd1; padding: 10px 14px; text-align: left; background-color: #f5f5f5; font-weight: 700;">Section</th>
+            <th style="border: 1px solid #c7cdd1; padding: 10px 14px; text-align: left; background-color: #f5f5f5; font-weight: 700;">What You&#x2019;ll Learn</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">Section 1: Build and visualize</td>
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">Insert 50, 30, 70, 20, 40, 60, 80; print all three traversals and height</td>
+        </tr>
+        <tr style="background-color: #fafafa;">
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">Section 2: Search</td>
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">Search for values that exist and values that don&#x2019;t; confirm correct true/false</td>
+        </tr>
+    </tbody>
+</table>
+
+<h3>&#x1F5BC;&#xFE0F; Diagrams</h3>
+<p>Diagrams are included in the <code>images/</code> folder and referenced in the source code comments. These help visualize what&#x2019;s happening:</p>
+<table style="width: 100%; border-collapse: collapse; margin-bottom: 16px;">
+    <thead>
+        <tr>
+            <th style="border: 1px solid #c7cdd1; padding: 10px 14px; text-align: left; background-color: #f5f5f5; font-weight: 700;">Diagram</th>
+            <th style="border: 1px solid #c7cdd1; padding: 10px 14px; text-align: left; background-color: #f5f5f5; font-weight: 700;">Shows</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;"><code>bst_property</code></td>
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">BST property: left &lt; parent &lt; right, annotated on the 7-node example tree</td>
+        </tr>
+        <tr style="background-color: #fafafa;">
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;"><code>node_structure</code></td>
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">Three-cell node diagram: left pointer | data | right pointer</td>
+        </tr>
+        <tr>
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;"><code>insert_path</code></td>
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">Step-by-step insert path for value 40 with code and tree trace</td>
+        </tr>
+        <tr style="background-color: #fafafa;">
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;"><code>search_path</code></td>
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">Search path: found (40) vs not found (45), showing subtree elimination</td>
+        </tr>
+        <tr>
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;"><code>traversal_inorder</code></td>
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">In-order traversal with numbered visit order on 11-node tree</td>
+        </tr>
+        <tr style="background-color: #fafafa;">
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;"><code>traversal_preorder</code></td>
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">Pre-order traversal with numbered visit order on 11-node tree</td>
+        </tr>
+        <tr>
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;"><code>traversal_postorder</code></td>
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">Post-order traversal with numbered visit order on 11-node tree</td>
+        </tr>
+        <tr style="background-color: #fafafa;">
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;"><code>height_convention</code></td>
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">Height at each level: nullptr=-1, leaf=0, with 1+max calculation</td>
+        </tr>
+        <tr>
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;"><code>degenerate_bst</code></td>
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">Balanced vs degenerate: sorted insert creates a right-spine linked list</td>
+        </tr>
+    </tbody>
+</table>
+
+<h3>&#x1F4CA; Grading (30 points)</h3>
+<p>Your code is auto-graded by GitHub Classroom when you push. Tests check that each TODO produces the correct output.</p>
+<table style="width: 100%; border-collapse: collapse; margin-bottom: 16px;">
+    <thead>
+        <tr>
+            <th style="border: 1px solid #c7cdd1; padding: 10px 14px; background-color: #f5f5f5; font-weight: 700;">Category</th>
+            <th style="border: 1px solid #c7cdd1; padding: 10px 14px; background-color: #f5f5f5; font-weight: 700;">Points</th>
+            <th style="border: 1px solid #c7cdd1; padding: 10px 14px; background-color: #f5f5f5; font-weight: 700;">What is tested</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">Build</td>
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">0</td>
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">Project must compile (tests won&#x2019;t run otherwise)</td>
+        </tr>
+        <tr style="background-color: #fafafa;">
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">Insert</td>
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">6</td>
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">Single insert, multiple inserts, duplicates ignored, height after insert</td>
+        </tr>
+        <tr>
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">Search</td>
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">6</td>
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">Found, not found, root only, empty tree, negative values, large dataset</td>
+        </tr>
+        <tr style="background-color: #fafafa;">
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">Traversals</td>
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">12</td>
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">In-order (sorted output, 4 pts), pre-order (root first, 4 pts), post-order (root last, 4 pts)</td>
+        </tr>
+        <tr>
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">Height</td>
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">6</td>
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">Empty (-1), single node (0), balanced 7-node (2), degenerate right/left spine (n-1)</td>
+        </tr>
+        <tr>
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px; font-weight: 700; background-color: #f5f5f5;"><strong>Total</strong></td>
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px; font-weight: 700; background-color: #f5f5f5;"><strong>30</strong></td>
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px; background-color: #f5f5f5;"></td>
+        </tr>
+    </tbody>
+</table>
+
+<h3>&#x1F527; Troubleshooting</h3>
+
+<h4>CMake does not configure automatically</h4>
+<ol>
+    <li>Make sure you have <strong>Desktop development with C++</strong> workload installed in Visual Studio</li>
+    <li>Go to <em>Project &rarr; CMake Settings</em> and ensure the configuration is correct</li>
+    <li>Try <em>Project &rarr; Delete Cache and Reconfigure</em></li>
+    <li>Verify that <code>CMakeLists.txt</code> is in the root of your cloned repository</li>
+</ol>
+
+<h4>Tests fail to build</h4>
+<ul>
+    <li>Google Test is fetched automatically via CMake&#x2019;s <code>FetchContent</code> &mdash; make sure you have an internet connection during the first build</li>
+    <li>Do <strong>not</strong> modify header files in the <code>include/</code> folder</li>
+</ul>
+
+<h4>Running the Program</h4>
+<ol>
+    <li>In Visual Studio, select <code>ct15-binary-search-trees.exe</code> as the startup item from the dropdown</li>
+    <li>Press <strong>Ctrl+F5</strong> to run without debugging</li>
+    <li>You should see output from each section as you complete the TODOs</li>
+</ol>
+
+<div style="padding: 14px 18px; border-radius: 4px; margin-bottom: 16px; background-color: #dff0d8; border: 1px solid #d6e9c6; color: #3c763d;">
+    <strong>Tip:</strong> Look for the <code>// ! DISCUSSION:</code> comments in each file &mdash; these explain the &#x201C;why&#x201D; behind each concept. The <code>// ? SEE DIAGRAM:</code> comments point you to visual aids in the <code>images/</code> folder.
+</div>
