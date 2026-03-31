@@ -2,9 +2,8 @@
 // CT14: Binary Search Tree — Implementation
 // =============================================================================
 //
-// Complete instructor solutions file.
-// Every section is annotated with DISCUSSION and SEE DIAGRAM blocks for
-// in-class presentation.
+// Student implementation file.
+// Follow along in class — each TODO section will be completed together.
 //
 // Node structure is defined in BinarySearchTree.h.
 // BST property: for every node N,
@@ -16,7 +15,7 @@
 #include <iostream>
 
 // =============================================================================
-// 1. Constructor / Destructor
+// 1. Constructor / Destructor  [PROVIDED]
 // =============================================================================
 
 // ---------------------------------------------------------------------------
@@ -44,7 +43,7 @@ BinarySearchTree::~BinarySearchTree() {
 }
 
 // ---------------------------------------------------------------------------
-// destroy_() — post-order recursive deletion
+// destroy_() — post-order recursive deletion  [PROVIDED]
 // ---------------------------------------------------------------------------
 //
 // ! DISCUSSION: Destruction must be post-order (children before parent).
@@ -65,7 +64,7 @@ void BinarySearchTree::destroy_(Node* node) {
 // =============================================================================
 
 // ---------------------------------------------------------------------------
-// insert() — public wrapper
+// insert() — public wrapper  [PROVIDED]
 // ---------------------------------------------------------------------------
 //
 // ! DISCUSSION: Why insert_ returns a Node*.
@@ -97,19 +96,14 @@ void BinarySearchTree::insert(int value) {
 //     (AVL trees, the next topic, fix this)
 //
 Node* BinarySearchTree::insert_(Node* node, int value) {
-    // Base case: we've reached an empty slot — this is where the new node goes
-    if (!node) return new Node(value);
+    // TODO 1: Implement recursive insert
+    //   - Base case: if node is nullptr, return a new Node(value)
+    //   - If value < node->data: recurse left, assign result to node->left
+    //   - If value > node->data: recurse right, assign result to node->right
+    //   - If value == node->data: do nothing (duplicate)
+    //   - Return node (so the parent can reattach its child pointer)
 
-    if (value < node->data) {
-        // Value belongs in the left subtree — recurse and reattach
-        node->left = insert_(node->left, value);
-    } else if (value > node->data) {
-        // Value belongs in the right subtree — recurse and reattach
-        node->right = insert_(node->right, value);
-    }
-    // value == node->data: duplicate, do nothing
-
-    return node;  // return unchanged node so parent can reattach it
+    return node;
 }
 
 // =============================================================================
@@ -117,7 +111,7 @@ Node* BinarySearchTree::insert_(Node* node, int value) {
 // =============================================================================
 
 // ---------------------------------------------------------------------------
-// search() — public wrapper
+// search() — public wrapper  [PROVIDED]
 // ---------------------------------------------------------------------------
 bool BinarySearchTree::search(int value) const {
     return search_(root_, value);
@@ -141,18 +135,13 @@ bool BinarySearchTree::search(int value) const {
 //   - this is why balance matters — motivates AVL trees
 //
 bool BinarySearchTree::search_(Node* node, int value) const {
-    // Base case: fell off the tree — value not found
-    if (!node) return false;
+    // TODO 2: Implement recursive search
+    //   - Base case: if node is nullptr, return false (not found)
+    //   - If value == node->data, return true (found!)
+    //   - If value < node->data, recurse left and return the result
+    //   - Otherwise, recurse right and return the result
 
-    // Base case: found the value
-    if (value == node->data) return true;
-
-    // Recurse into the correct subtree
-    if (value < node->data) {
-        return search_(node->left, value);
-    } else {
-        return search_(node->right, value);
-    }
+    return false;
 }
 
 // =============================================================================
@@ -182,10 +171,12 @@ void BinarySearchTree::inorder() const {
 }
 
 void BinarySearchTree::inorder_(Node* node) const {
-    if (!node) return;
-    inorder_(node->left);
-    std::cout << node->data << " ";
-    inorder_(node->right);
+    // TODO 3: Implement in-order traversal (Left → Root → Right)
+    //   - Base case: if node is nullptr, return
+    //   - Recurse on node->left
+    //   - Print node->data followed by a space
+    //   - Recurse on node->right
+
 }
 
 // ---------------------------------------------------------------------------
@@ -205,10 +196,12 @@ void BinarySearchTree::preorder() const {
 }
 
 void BinarySearchTree::preorder_(Node* node) const {
-    if (!node) return;
-    std::cout << node->data << " ";
-    preorder_(node->left);
-    preorder_(node->right);
+    // TODO 4: Implement pre-order traversal (Root → Left → Right)
+    //   - Base case: if node is nullptr, return
+    //   - Print node->data followed by a space
+    //   - Recurse on node->left
+    //   - Recurse on node->right
+
 }
 
 // ---------------------------------------------------------------------------
@@ -227,10 +220,12 @@ void BinarySearchTree::postorder() const {
 }
 
 void BinarySearchTree::postorder_(Node* node) const {
-    if (!node) return;
-    postorder_(node->left);
-    postorder_(node->right);
-    std::cout << node->data << " ";
+    // TODO 5: Implement post-order traversal (Left → Right → Root)
+    //   - Base case: if node is nullptr, return
+    //   - Recurse on node->left
+    //   - Recurse on node->right
+    //   - Print node->data followed by a space
+
 }
 
 // =============================================================================
@@ -238,7 +233,7 @@ void BinarySearchTree::postorder_(Node* node) const {
 // =============================================================================
 
 // ---------------------------------------------------------------------------
-// height() — public wrapper
+// height() — public wrapper  [PROVIDED]
 // ---------------------------------------------------------------------------
 int BinarySearchTree::height() const {
     return height_(root_);
@@ -261,13 +256,18 @@ int BinarySearchTree::height() const {
 //   - using -1 (not 0) for nullptr avoids an off-by-one in every case
 //
 int BinarySearchTree::height_(Node* node) const {
-    if (!node) return -1;
-    // the +1 counts the edge from this node down to its tallest child
-    return 1 + std::max(height_(node->left), height_(node->right));
+    // TODO 6: Implement recursive height
+    //   - Base case: if node is nullptr, return -1
+    //   - Recursively get height of left subtree
+    //   - Recursively get height of right subtree
+    //   - Return 1 + max(left_height, right_height)
+    //     (the +1 counts the edge from this node to its tallest child)
+
+    return -1;
 }
 
 // =============================================================================
-// 6. is_empty
+// 6. is_empty  [PROVIDED]
 // =============================================================================
 
 bool BinarySearchTree::is_empty() const {
@@ -298,4 +298,3 @@ bool BinarySearchTree::is_empty() const {
 // NOTE: inorder_apply and inorder_apply_ are template methods defined
 //       entirely in the header — no .cpp code needed. This section exists
 //       only for the DISCUSSION comments above.
-
