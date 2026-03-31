@@ -1,0 +1,197 @@
+name: Autograding Tests
+on:
+  - push
+  - repository_dispatch
+permissions:
+  checks: write
+  actions: read
+  contents: read
+
+jobs:
+  run-autograding-tests:
+    runs-on: ubuntu-latest
+    if: github.actor != 'github-classroom[bot]'
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Build Project
+      continue-on-error: true
+      run: |
+        cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
+        cmake --build build --config Release
+
+    - name: Build Check (0 points)
+      id: build
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Build Check (0 points)
+        setup-command: ''
+        command: |
+          if [ -f build/run_tests ]; then
+            echo "Build successful"
+          else
+            echo "Build failed" && exit 1
+          fi
+        timeout: 10
+        max-score: 0
+
+    # ==================== Insert Tests (5 points) ====================
+
+    - name: Insert Basic (2 points)
+      id: insert-basic
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Insert Basic (2 points)
+        setup-command: ''
+        command: |
+          if [ -f build/run_tests ]; then
+            cd build && ./run_tests --gtest_filter=BSTInsert.SingleInsertNotEmpty:BSTInsert.SingleInsertSearchFindsIt:BSTInsert.SingleInsertHeightZero
+          else
+            exit 1
+          fi
+        timeout: 10
+        max-score: 2
+
+    - name: Insert Multiple & Duplicates (3 points)
+      id: insert-advanced
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Insert Multiple & Duplicates (3 points)
+        setup-command: ''
+        command: |
+          if [ -f build/run_tests ]; then
+            cd build && ./run_tests --gtest_filter=BSTInsert.TwoNodesHeight:BSTInsert.DuplicateIgnored:BSTInsert.MultipleValues
+          else
+            exit 1
+          fi
+        timeout: 10
+        max-score: 3
+
+    # ==================== Search Tests (5 points) ====================
+
+    - name: Search Found & Not Found (3 points)
+      id: search-basic
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Search Found & Not Found (3 points)
+        setup-command: ''
+        command: |
+          if [ -f build/run_tests ]; then
+            cd build && ./run_tests --gtest_filter=BSTSearch.FoundAndNotFound:BSTSearch.RootOnly:BSTConstructor.SearchOnEmptyReturnsFalse
+          else
+            exit 1
+          fi
+        timeout: 10
+        max-score: 3
+
+    - name: Search Edge Cases (2 points)
+      id: search-edge
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Search Edge Cases (2 points)
+        setup-command: ''
+        command: |
+          if [ -f build/run_tests ]; then
+            cd build && ./run_tests --gtest_filter=BSTMisc.NegativeValues:BSTMisc.LargerDatasetSortedOutput
+          else
+            exit 1
+          fi
+        timeout: 10
+        max-score: 2
+
+    # ==================== Traversal Tests (10 points) ====================
+
+    - name: In-Order Traversal (4 points)
+      id: traversal-inorder
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: In-Order Traversal (4 points)
+        setup-command: ''
+        command: |
+          if [ -f build/run_tests ]; then
+            cd build && ./run_tests --gtest_filter=BSTTraversal.InorderProducesSortedOutput:BSTTraversal.SingleNodeInorder:BSTTraversal.InorderAfterRandomInsertions
+          else
+            exit 1
+          fi
+        timeout: 10
+        max-score: 4
+
+    - name: Pre-Order Traversal (3 points)
+      id: traversal-preorder
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Pre-Order Traversal (3 points)
+        setup-command: ''
+        command: |
+          if [ -f build/run_tests ]; then
+            cd build && ./run_tests --gtest_filter=BSTTraversal.PreorderRootFirst
+          else
+            exit 1
+          fi
+        timeout: 10
+        max-score: 3
+
+    - name: Post-Order Traversal (3 points)
+      id: traversal-postorder
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Post-Order Traversal (3 points)
+        setup-command: ''
+        command: |
+          if [ -f build/run_tests ]; then
+            cd build && ./run_tests --gtest_filter=BSTTraversal.PostorderRootLast
+          else
+            exit 1
+          fi
+        timeout: 10
+        max-score: 3
+
+    # ==================== Height Tests (5 points) ====================
+
+    - name: Height Basic (2 points)
+      id: height-basic
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Height Basic (2 points)
+        setup-command: ''
+        command: |
+          if [ -f build/run_tests ]; then
+            cd build && ./run_tests --gtest_filter=BSTHeight.SingleNodeZero:BSTHeight.ThreeNodeBalanced:BSTConstructor.DefaultHeightIsNegativeOne
+          else
+            exit 1
+          fi
+        timeout: 10
+        max-score: 2
+
+    - name: Height Balanced & Degenerate (3 points)
+      id: height-advanced
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Height Balanced & Degenerate (3 points)
+        setup-command: ''
+        command: |
+          if [ -f build/run_tests ]; then
+            cd build && ./run_tests --gtest_filter=BSTHeight.BalancedSevenNodeTree:BSTHeight.DegenerateTreeRightSpine:BSTHeight.DegenerateTreeLeftSpine
+          else
+            exit 1
+          fi
+        timeout: 10
+        max-score: 3
+
+    - name: Autograding Reporter
+      uses: classroom-resources/autograding-grading-reporter@v1
+      env:
+        BUILD_RESULTS:              "${{steps.build.outputs.result}}"
+        INSERT-BASIC_RESULTS:       "${{steps.insert-basic.outputs.result}}"
+        INSERT-ADVANCED_RESULTS:    "${{steps.insert-advanced.outputs.result}}"
+        SEARCH-BASIC_RESULTS:       "${{steps.search-basic.outputs.result}}"
+        SEARCH-EDGE_RESULTS:        "${{steps.search-edge.outputs.result}}"
+        TRAVERSAL-INORDER_RESULTS:  "${{steps.traversal-inorder.outputs.result}}"
+        TRAVERSAL-PREORDER_RESULTS: "${{steps.traversal-preorder.outputs.result}}"
+        TRAVERSAL-POSTORDER_RESULTS: "${{steps.traversal-postorder.outputs.result}}"
+        HEIGHT-BASIC_RESULTS:       "${{steps.height-basic.outputs.result}}"
+        HEIGHT-ADVANCED_RESULTS:    "${{steps.height-advanced.outputs.result}}"
+      with:
+        runners: build,insert-basic,insert-advanced,search-basic,search-edge,traversal-inorder,traversal-preorder,traversal-postorder,height-basic,height-advanced
