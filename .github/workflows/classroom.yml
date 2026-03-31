@@ -37,13 +37,13 @@ jobs:
         timeout: 10
         max-score: 0
 
-    # ==================== Insert Tests (5 points) ====================
+    # ==================== Insert Tests (6 points) ====================
 
-    - name: Insert Basic (2 points)
+    - name: Insert Basic (3 points)
       id: insert-basic
       uses: classroom-resources/autograding-command-grader@v1
       with:
-        test-name: Insert Basic (2 points)
+        test-name: Insert Basic (3 points)
         setup-command: ''
         command: |
           if [ -f build/run_tests ]; then
@@ -52,7 +52,7 @@ jobs:
             exit 1
           fi
         timeout: 10
-        max-score: 2
+        max-score: 3
 
     - name: Insert Multiple & Duplicates (3 points)
       id: insert-advanced
@@ -69,7 +69,7 @@ jobs:
         timeout: 10
         max-score: 3
 
-    # ==================== Search Tests (5 points) ====================
+    # ==================== Search Tests (6 points) ====================
 
     - name: Search Found & Not Found (3 points)
       id: search-basic
@@ -86,11 +86,11 @@ jobs:
         timeout: 10
         max-score: 3
 
-    - name: Search Edge Cases (2 points)
+    - name: Search Edge Cases (3 points)
       id: search-edge
       uses: classroom-resources/autograding-command-grader@v1
       with:
-        test-name: Search Edge Cases (2 points)
+        test-name: Search Edge Cases (3 points)
         setup-command: ''
         command: |
           if [ -f build/run_tests ]; then
@@ -99,9 +99,9 @@ jobs:
             exit 1
           fi
         timeout: 10
-        max-score: 2
+        max-score: 3
 
-    # ==================== Traversal Tests (10 points) ====================
+    # ==================== Traversal Tests (12 points) ====================
 
     - name: In-Order Traversal (4 points)
       id: traversal-inorder
@@ -118,11 +118,11 @@ jobs:
         timeout: 10
         max-score: 4
 
-    - name: Pre-Order Traversal (3 points)
+    - name: Pre-Order Traversal (4 points)
       id: traversal-preorder
       uses: classroom-resources/autograding-command-grader@v1
       with:
-        test-name: Pre-Order Traversal (3 points)
+        test-name: Pre-Order Traversal (4 points)
         setup-command: ''
         command: |
           if [ -f build/run_tests ]; then
@@ -131,13 +131,13 @@ jobs:
             exit 1
           fi
         timeout: 10
-        max-score: 3
+        max-score: 4
 
-    - name: Post-Order Traversal (3 points)
+    - name: Post-Order Traversal (4 points)
       id: traversal-postorder
       uses: classroom-resources/autograding-command-grader@v1
       with:
-        test-name: Post-Order Traversal (3 points)
+        test-name: Post-Order Traversal (4 points)
         setup-command: ''
         command: |
           if [ -f build/run_tests ]; then
@@ -146,15 +146,15 @@ jobs:
             exit 1
           fi
         timeout: 10
-        max-score: 3
+        max-score: 4
 
-    # ==================== Height Tests (5 points) ====================
+    # ==================== Height Tests (6 points) ====================
 
-    - name: Height Basic (2 points)
+    - name: Height Basic (3 points)
       id: height-basic
       uses: classroom-resources/autograding-command-grader@v1
       with:
-        test-name: Height Basic (2 points)
+        test-name: Height Basic (3 points)
         setup-command: ''
         command: |
           if [ -f build/run_tests ]; then
@@ -163,7 +163,7 @@ jobs:
             exit 1
           fi
         timeout: 10
-        max-score: 2
+        max-score: 3
 
     - name: Height Balanced & Degenerate (3 points)
       id: height-advanced
