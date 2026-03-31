@@ -4,7 +4,7 @@
 #include "Functors.h" // PrintFunctor, SumFunctor, CountFunctor
 
 // =============================================================================
-// CT14: Binary Search Trees — Day 1
+// CT15: Binary Search Trees — Day 1
 // =============================================================================
 //
 // A Binary Search Tree (BST) is a linked structure where every node obeys

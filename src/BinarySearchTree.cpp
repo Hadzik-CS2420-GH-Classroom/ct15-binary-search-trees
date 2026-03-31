@@ -1,5 +1,5 @@
 // =============================================================================
-// CT14: Binary Search Tree — Implementation
+// CT15: Binary Search Tree — Implementation
 // =============================================================================
 //
 // Student implementation file.

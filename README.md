@@ -1,4 +1,4 @@
-# CT14 -- Binary Search Trees
+# CT15 -- Binary Search Trees
 
 ## Overview
 
@@ -15,7 +15,7 @@ An in-class code-together activity implementing a **Binary Search Tree (BST)** f
 ## Project Structure
 
 ```
-ct14-binary-search-trees/
+ct15-binary-search-trees/
 ├── CMakeLists.txt
 ├── assignment.json
 ├── README.md
@@ -25,7 +25,7 @@ ct14-binary-search-trees/
 │   ├── BinarySearchTree.cpp    # Implementation (main teaching file)
 │   └── main.cpp                # Demo driver showing all operations
 ├── tests/
-│   └── ct14_test.cpp           # Google Test suite
+│   └── ct15_test.cpp           # Google Test suite
 └── images/
     ├── cpp_diagrams.md         # Diagram list for BinarySearchTree.cpp
     └── header_diagrams.md      # Diagram list for BinarySearchTree.h

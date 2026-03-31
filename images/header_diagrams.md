@@ -1,4 +1,4 @@
-# CT14 -- Header Diagrams
+# CT15 -- Header Diagrams
 
 Conceptual diagrams referenced from `BinarySearchTree.h`.
 
