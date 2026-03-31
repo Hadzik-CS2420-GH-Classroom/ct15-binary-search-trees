@@ -1,4 +1,4 @@
-# CT14 -- Functor Diagrams
+# CT15 -- Functor Diagrams
 
 Conceptual diagrams referenced from `Functors.h`.
 

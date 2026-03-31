@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.24)
-project(ct14-binary-search-trees LANGUAGES CXX)
+project(ct15-binary-search-trees LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -29,7 +29,7 @@ FetchContent_MakeAvailable(googletest)
 
 # Test executable
 add_executable(run_tests
-    tests/ct14_test.cpp
+    tests/ct15_test.cpp
     ${LIB_SOURCES}
 )
 target_include_directories(run_tests PRIVATE include)

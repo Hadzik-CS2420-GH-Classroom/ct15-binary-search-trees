@@ -1,4 +1,4 @@
-# CT14 -- Implementation Diagrams
+# CT15 -- Implementation Diagrams
 
 Code-block diagrams referenced from `BinarySearchTree.cpp`.
 
