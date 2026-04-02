@@ -1,9 +1,9 @@
-<!-- Canvas LMS HTML Fragment -- paste into the Rich Content Editor (HTML view) -->
+<!-- Canvas LMS HTML Fragment — paste into the Rich Content Editor (HTML view) -->
 
-<h2>&#x1F468;&#x200D;&#x1F4BB; Code-Together 15: Binary Search Trees</h2>
+<h2>👨‍💻 Code-Together Activity 15: Binary Search Trees - Day 1</h2>
 
 <h3>&#x1F3AF; Overview</h3>
-<p>An in-class code-together activity implementing a <strong>Binary Search Tree (BST)</strong> from scratch using recursive patterns. Students implement <code>BinarySearchTree.cpp</code> guided by the instructor, building insert, search, three traversals (in-order, pre-order, post-order), and height. The activity covers the BST property, why in-order traversal produces sorted output, and introduces functors as a flexible alternative to hardcoded print traversals.</p>
+<p>An in-class code-together activity implementing a <strong>Binary Search Tree (BST)</strong> from scratch using recursive patterns. Students implement <code>BinarySearchTree.cpp</code> guided by the instructor, building insert, search, three traversals (in-order, pre-order, post-order), and height. The activity closes with a <strong>functor demo</strong>: three pre-built functor structs (PrintFunctor, SumFunctor, CountFunctor) show how separating traversal logic from per-node actions makes the same traversal reusable for printing, summing, and counting.</p>
 
 <h3>&#x1F4D6; Learning Objectives</h3>
 <p>By completing this activity, you will be able to:</p>
@@ -11,9 +11,9 @@
     <li>Implement <strong>insert</strong> recursively, understanding that new nodes always become leaves and duplicates are ignored</li>
     <li>Implement <strong>search</strong> and explain why it is identical to binary search on a sorted array, achieving O(log n) on a balanced tree</li>
     <li>Implement <strong>in-order traversal</strong> and explain why it produces sorted output given the BST property</li>
-    <li>Implement <strong>pre-order</strong> and <strong>post-order</strong> traversals and identify a real use case for each</li>
+    <li>Implement <strong>pre-order</strong> and <strong>post-order</strong> traversals and identify a real use case for each (copy/serialize vs. safe deletion)</li>
     <li>Implement <strong>height</strong> recursively, using -1 as the base case for nullptr so a leaf has height 0</li>
-    <li>Explain the <strong>public/private helper pattern</strong>: public methods provide a clean interface while private helpers recurse through the tree</li>
+    <li>Explain what a <strong>functor</strong> is and why it is more flexible than a hardcoded print traversal &mdash; a struct with operator() can carry state (running sum, count) that a plain function cannot</li>
 </ul>
 
 <h3>&#x1F680; Getting Started</h3>
@@ -44,14 +44,42 @@
 <p>Visual Studio will automatically run CMake. Watch the <strong>Output</strong> window (<em>View &rarr; Output</em>, select <em>&#x201C;Show output from: CMake&#x201D;</em>) until you see:</p>
 <pre style="background-color: #1e1e1e; color: #d4d4d4; padding: 16px 20px; border-radius: 4px; overflow-x: auto; font-family: 'Menlo', 'Monaco', 'Consolas', 'Courier New', monospace; font-size: 0.875em; line-height: 1.6;">CMake generation finished.</pre>
 
+<h3>&#x1F4C1; Project Structure</h3>
+<pre style="background-color: #1e1e1e; color: #d4d4d4; padding: 16px 20px; border-radius: 4px; font-family: 'Menlo', 'Monaco', 'Consolas', 'Courier New', monospace; font-size: 0.875em; line-height: 1.8;">ct15-binary-search-trees/
+├── CMakeLists.txt
+├── assignment.json
+├── README.md
+├── include/
+│   ├── BinarySearchTree.h      # Node struct + class declaration
+│   └── Functors.h              # PrintFunctor, SumFunctor, CountFunctor (provided)
+├── src/
+│   ├── BinarySearchTree.cpp    # Implementation (main teaching file)
+│   └── main.cpp                # Demo driver showing all operations
+├── tests/
+│   └── ct15_test.cpp           # Google Test suite
+└── images/
+    ├── cpp_diagrams.md         # Diagram list for BinarySearchTree.cpp
+    ├── functor_diagrams.md     # Diagram list for Functors.h and inorder_apply
+    └── header_diagrams.md      # Diagram list for BinarySearchTree.h</pre>
+
 <h3>&#x1F4DD; What You&#x2019;ll Do</h3>
-<p>Open <code>BinarySearchTree.cpp</code> and complete the <code>TODO</code> comments. Each TODO tells you what to write, and the <strong>DISCUSSION</strong> comments explain the &#x201C;why&#x201D; behind the code. The <strong>SEE DIAGRAM</strong> comments point you to visual aids in the <code>images/</code> folder. We&#x2019;ll work through these together in class.</p>
+<p>Work through <code>BinarySearchTree.cpp</code> section by section, implementing each method as the instructor explains the concept. Sections 1–5 are TODOs (constructor through height); Section 7 is a provided functor demo with discussion. After each section, run <code>main.cpp</code> to verify output. The session closes with Section 3 of main: three pre-built functors (PrintFunctor, SumFunctor, CountFunctor) applied via <code>inorder_apply</code> to show how the same traversal can print, sum, or count without rewriting traversal logic.</p>
 
 <h3>&#x1F4DA; Teaching Order</h3>
-<p>Work through the files in order:</p>
+<p>Work through the files in the order <code>main.cpp</code> calls them:</p>
 
 <h4>1. <code>BinarySearchTree.h</code> &mdash; Node struct and class declaration</h4>
-<p>Walk through the header. Discuss the BST property, the Node struct, and the public/private helper pattern (public wrappers call private recursive helpers).</p>
+<table style="width: 100%; border-collapse: collapse; margin-bottom: 16px;">
+    <thead>
+        <tr>
+            <th style="border: 1px solid #c7cdd1; padding: 10px 14px; text-align: left; background-color: #f5f5f5; font-weight: 700;">Section</th>
+            <th style="border: 1px solid #c7cdd1; padding: 10px 14px; text-align: left; background-color: #f5f5f5; font-weight: 700;">What You&#x2019;ll Learn</th>
+        </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+<h4>2. <code>Functors.h</code> &mdash; Functor definitions (provided)</h4>
 <table style="width: 100%; border-collapse: collapse; margin-bottom: 16px;">
     <thead>
         <tr>
@@ -61,21 +89,20 @@
     </thead>
     <tbody>
         <tr>
-            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;"><code>struct Node</code></td>
-            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">Each node holds data + two child pointers; nodes are heap-allocated</td>
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">PrintFunctor</td>
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">stateless; operator()(int) prints value + space; callable like a function</td>
         </tr>
         <tr style="background-color: #fafafa;">
-            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">BST Property</td>
-            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">Left subtree &lt; node &lt; right subtree; holds recursively at every node</td>
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">SumFunctor</td>
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">stateful; accumulates <code>total</code>; persists state between calls via struct member</td>
         </tr>
         <tr>
-            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">Public/Private Pattern</td>
-            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">Public <code>insert(int)</code> calls private <code>insert_(Node*, int)</code>; hides tree internals</td>
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">CountFunctor</td>
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">stateful; increments <code>count</code> regardless of value; ignores the argument entirely</td>
         </tr>
     </tbody>
 </table>
-
-<h4>2. <code>BinarySearchTree.cpp</code> &mdash; Implementations (6 TODOs)</h4>
+<h4>3. <code>BinarySearchTree.cpp</code> &mdash; Implementations (6 TODOs + functor discussion)</h4>
 <table style="width: 100%; border-collapse: collapse; margin-bottom: 16px;">
     <thead>
         <tr>
@@ -85,33 +112,40 @@
     </thead>
     <tbody>
         <tr>
-            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">TODO 1: <code>insert_()</code></td>
-            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">BST property routes each value left or right; new nodes land as leaves; return-the-node pattern reattaches child pointers</td>
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">Section 1: Constructor / Destructor</td>
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">initialize root_ to nullptr; destroy_ uses post-order to free children before parent</td>
         </tr>
         <tr style="background-color: #fafafa;">
-            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">TODO 2: <code>search_()</code></td>
-            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">Same logic as binary search; each comparison eliminates one subtree; O(log n) balanced, O(n) degenerate</td>
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">Section 2: insert / insert_</td>
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">return-the-node pattern; BST property routes each value left or right; new nodes land as leaves</td>
         </tr>
         <tr>
-            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">TODO 3: <code>inorder_()</code></td>
-            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">Left &rarr; Root &rarr; Right; produces sorted output by BST property</td>
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">Section 3: search / search_</td>
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">identical logic to binary search; each comparison eliminates one subtree; O(log n) on balanced tree</td>
         </tr>
         <tr style="background-color: #fafafa;">
-            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">TODO 4: <code>preorder_()</code></td>
-            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">Root &rarr; Left &rarr; Right; root printed first; useful for cloning/serializing</td>
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">Section 4a: inorder / inorder_</td>
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">Left-Root-Right; produces ascending sorted output by the BST property</td>
         </tr>
         <tr>
-            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">TODO 5: <code>postorder_()</code></td>
-            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">Left &rarr; Right &rarr; Root; children before parent; same order as safe deletion</td>
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">Section 4b: preorder / preorder_</td>
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">Root-Left-Right; root is first; useful for cloning/serializing the tree</td>
         </tr>
         <tr style="background-color: #fafafa;">
-            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">TODO 6: <code>height_()</code></td>
-            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">Base case: nullptr returns -1; each node adds 1 + max(left, right); height determines O(log n) vs O(n)</td>
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">Section 4c: postorder / postorder_</td>
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">Left-Right-Root; root is last; same order as safe deletion</td>
+        </tr>
+        <tr>
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">Section 5: height / height_</td>
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">base case nullptr = -1; leaf = 0; recursive max + 1</td>
+        </tr>
+        <tr style="background-color: #fafafa;">
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">Section 7: Functors (provided, discussion only)</td>
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">no TODO; discuss why inorder_apply is a template, how the compiler generates one version per functor type, and why functors beat function pointers for stateful operations</td>
         </tr>
     </tbody>
 </table>
-
-<h4>3. <code>main.cpp</code> &mdash; Demo driver (provided)</h4>
+<h4>4. <code>main.cpp</code> &mdash; Demo driver (3 sections)</h4>
 <table style="width: 100%; border-collapse: collapse; margin-bottom: 16px;">
     <thead>
         <tr>
@@ -122,15 +156,18 @@
     <tbody>
         <tr>
             <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">Section 1: Build and visualize</td>
-            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">Insert 50, 30, 70, 20, 40, 60, 80; print all three traversals and height</td>
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">insert 50, 30, 70, 20, 40, 60, 80; print all three traversals and height</td>
         </tr>
         <tr style="background-color: #fafafa;">
             <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">Section 2: Search</td>
-            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">Search for values that exist and values that don&#x2019;t; confirm correct true/false</td>
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">search for values that exist and values that don't; confirm correct true/false</td>
+        </tr>
+        <tr>
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">Section 3: Functors</td>
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">apply PrintFunctor (same output as inorder), SumFunctor (total = 350), CountFunctor (count = 7); compare to hardcoded print and discuss why functors win</td>
         </tr>
     </tbody>
 </table>
-
 <h3>&#x1F5BC;&#xFE0F; Diagrams</h3>
 <p>Diagrams are included in the <code>images/</code> folder and referenced in the source code comments. These help visualize what&#x2019;s happening:</p>
 <table style="width: 100%; border-collapse: collapse; margin-bottom: 16px;">
@@ -143,11 +180,11 @@
     <tbody>
         <tr>
             <td style="border: 1px solid #c7cdd1; padding: 10px 14px;"><code>bst_property</code></td>
-            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">BST property: left &lt; parent &lt; right, annotated on the 7-node example tree</td>
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">BST property: left &lt; parent &lt; right, annotated on 7-node example tree</td>
         </tr>
         <tr style="background-color: #fafafa;">
             <td style="border: 1px solid #c7cdd1; padding: 10px 14px;"><code>node_structure</code></td>
-            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">Three-cell node diagram: left pointer | data | right pointer</td>
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">Three-cell node: left pointer, data, right pointer</td>
         </tr>
         <tr>
             <td style="border: 1px solid #c7cdd1; padding: 10px 14px;"><code>insert_path</code></td>
@@ -158,24 +195,36 @@
             <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">Search path: found (40) vs not found (45), showing subtree elimination</td>
         </tr>
         <tr>
-            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;"><code>traversal_inorder</code></td>
-            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">In-order traversal with numbered visit order on 11-node tree</td>
-        </tr>
-        <tr style="background-color: #fafafa;">
-            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;"><code>traversal_preorder</code></td>
-            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">Pre-order traversal with numbered visit order on 11-node tree</td>
-        </tr>
-        <tr>
-            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;"><code>traversal_postorder</code></td>
-            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">Post-order traversal with numbered visit order on 11-node tree</td>
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;"><code>traversal_orders</code></td>
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">All three traversal orders with numbered visit sequence on same tree</td>
         </tr>
         <tr style="background-color: #fafafa;">
             <td style="border: 1px solid #c7cdd1; padding: 10px 14px;"><code>height_convention</code></td>
             <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">Height at each level: nullptr=-1, leaf=0, with 1+max calculation</td>
         </tr>
         <tr>
-            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;"><code>degenerate_bst</code></td>
-            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">Balanced vs degenerate: sorted insert creates a right-spine linked list</td>
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;"><code>functor_what_is</code></td>
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">What a functor is: struct + operator() compared to a plain function</td>
+        </tr>
+        <tr style="background-color: #fafafa;">
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;"><code>functor_stateless_vs_stateful</code></td>
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">PrintFunctor (stateless) vs SumFunctor/CountFunctor (stateful with member)</td>
+        </tr>
+        <tr>
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;"><code>functor_inorder_apply</code></td>
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">inorder_apply template: one traversal, pluggable action at each node</td>
+        </tr>
+        <tr style="background-color: #fafafa;">
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;"><code>functor_apply_print</code></td>
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">Trace of inorder_apply with PrintFunctor on 7-node tree</td>
+        </tr>
+        <tr>
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;"><code>functor_apply_sum</code></td>
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">Trace of inorder_apply with SumFunctor: running total at each step</td>
+        </tr>
+        <tr style="background-color: #fafafa;">
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;"><code>functor_apply_count</code></td>
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">Trace of inorder_apply with CountFunctor: counter increments at each node</td>
         </tr>
     </tbody>
 </table>
@@ -194,7 +243,7 @@
         <tr>
             <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">Build</td>
             <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">0</td>
-            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">Project must compile (tests won&#x2019;t run otherwise)</td>
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">Project must compile (tests won't run otherwise)</td>
         </tr>
         <tr style="background-color: #fafafa;">
             <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">Insert</td>
@@ -215,6 +264,11 @@
             <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">Height</td>
             <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">6</td>
             <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">Empty (-1), single node (0), balanced 7-node (2), degenerate right/left spine (n-1)</td>
+        </tr>
+        <tr style="background-color: #fafafa;">
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">Functors</td>
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">0</td>
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">Provided infrastructure &mdash; tests verify integration works once BST is correct</td>
         </tr>
         <tr>
             <td style="border: 1px solid #c7cdd1; padding: 10px 14px; font-weight: 700; background-color: #f5f5f5;"><strong>Total</strong></td>
